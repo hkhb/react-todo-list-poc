@@ -7,9 +7,6 @@ function App() {
   
   return (
     <>
-      <div>
-        <a href="/next">Next Page</a>
-      </div>
       <h1>Vite + React</h1>
       <h1>Hello world</h1>
       <div className="card">
