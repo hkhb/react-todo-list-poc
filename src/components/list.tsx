@@ -15,8 +15,7 @@ import { TodoItem } from '../App.tsx'
               )}
           </p>
         </div>
-        
-        <p className="todo-description">{description}</p>
+          <p className="todo-description">{description}</p>
         </div>
     )
 }
