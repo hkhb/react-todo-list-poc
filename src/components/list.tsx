@@ -1,17 +1,9 @@
-// 必要なもの
-// データの型を定義
-// 表示：　タイトル、詳細情報、完了か？
 import React from 'react';
 import "./list.css"
-
-interface TodoItemData { //今回はinterface型とtype型のどちらでも可
-  title: string;
-  description?: string;
-  completed: boolean;
-};
+import { TodoItem } from '../page.tsx'
 
 interface ListsProps {
-  value: TodoItemData;
+  value: TodoItem;
 }
 
   const Lists : React.FC<ListsProps> = ({value}) => {
