@@ -9,6 +9,16 @@ function App() {
   const openModal = () =>{
     setShowModal(true);
   }
+
+  const closeModal = () =>{
+    setShowModal(false);
+  }
+  const HandleCancel = () => {
+    closeModal();
+  };
+  const HandleOk = () => {
+    closeModal();
+  }
   
   return (
     <>
@@ -23,7 +33,14 @@ function App() {
         </button>
       </div>
       <button onClick={openModal}>openmodal</button>
-      <Modal showFlag={showModal} setShowModal={setShowModal} content="親から渡された値です。"/>
+      <Modal
+        showFlag={showModal}
+        setShowModal={setShowModal}
+        cancelHandler={HandleCancel}
+        okHandler={HandleOk}
+      >
+        <p>親から渡された値です。</p>
+      </Modal>
     </>
   )
 }

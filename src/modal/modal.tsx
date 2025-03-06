@@ -4,25 +4,31 @@
 // OKボタンを配置し、クリック時、propsのokボタンハンドラをコール
 // キャンセルボタンを配置、クリック時、propsのキャンセルボタンハンドラをコール
 import './modal.css'
-interface modalprops{
+interface modalProps{
   showFlag: boolean;
-  content: React.ReactNode;
+  children: React.ReactNode;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  okHandler: () => void;
+  cancelHandler: () => void;
 }
 
 
-function Modal(props:modalprops){
-  const closeModal = () =>{
-    props.setShowModal(false);
-  }
+function Modal({
+    showFlag,
+    setShowModal,
+    cancelHandler,
+    okHandler,
+    children
+  }:modalProps){
   return(
-    props.showFlag?(
+    showFlag?(
       <div id="overlay" className="overlay" >
         <div id="modalContent" className="modalContent">
           <div>
             <h1>modal</h1>
-            <p>{props.content}</p>
-            <button onClick={closeModal}>close</button>
+            <div>{children}</div>
+            <button onClick={cancelHandler}>cancel</button>
+            <button onClick={okHandler}>OK</button>
           </div>
         </div>
       </div>
