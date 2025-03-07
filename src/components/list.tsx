@@ -2,17 +2,13 @@ import React from 'react';
 import "./list.css"
 import { TodoItem } from '../page.tsx'
 
-interface ListsProps {
-  value: TodoItem;
-}
-
-  const Lists : React.FC<ListsProps> = ({value}) => {
+  const Lists : React.FC<TodoItem> = ({completed, title, description}) => {
     return(
-      <div className={`todo-item ${value.completed ? 'completed' : 'pending'}`}>
+      <div className={`todo-item ${completed ? 'completed' : 'pending'}`}>
         <div className="todo-title-field">
-          <h2 className="todo-title">{value.title}</h2>
+          <h2 className="todo-title">{title}</h2>
           <p className="todo-status">
-            {value.completed ? (
+            {completed ? (
                   <span className="completed-icon">✔️ 完了</span>
               ) : (
                   <span className="pending-icon">❌ 未完了</span>
@@ -20,7 +16,7 @@ interface ListsProps {
           </p>
         </div>
         
-        <p className="todo-description">{value.description}</p>
+        <p className="todo-description">{description}</p>
         </div>
     )
 }

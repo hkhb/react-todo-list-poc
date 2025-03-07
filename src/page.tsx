@@ -31,7 +31,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <h1>TODOlist</h1>
     <ul>
-    {todoItems.map((todoItem)=> (<Lists key={todoItem.id} value={todoItem}/> ))}
+    {todoItems.map((todoItem)=> (<Lists key={todoItem.id} {...todoItem}/> ))}
     </ul>
   </StrictMode>,
 );
