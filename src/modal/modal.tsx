@@ -1,8 +1,3 @@
-//モーダルを作成
-//
-// 要件　内部コンテンツはchildrenで受け取る
-// OKボタンを配置し、クリック時、propsのokボタンハンドラをコール
-// キャンセルボタンを配置、クリック時、propsのキャンセルボタンハンドラをコール
 import './modal.css'
 interface modalProps{
   showFlag: boolean;
@@ -15,7 +10,6 @@ interface modalProps{
 
 function Modal({
     showFlag,
-    setShowModal,
     cancelHandler,
     okHandler,
     children
