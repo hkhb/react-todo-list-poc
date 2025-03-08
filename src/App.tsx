@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import Modal from './modal/modal'
+import Modal from './components/modal'
 import Lists from "./components/list.tsx"
 
 export interface TodoItem {
