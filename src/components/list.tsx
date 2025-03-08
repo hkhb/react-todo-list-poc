@@ -1,6 +1,6 @@
 import React from 'react';
 import "./list.css"
-import { TodoItem } from '../page.tsx'
+import { TodoItem } from '../App.tsx'
 
   const Lists : React.FC<TodoItem> = ({completed, title, description}) => {
     return(
