@@ -23,6 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-!.github/
-!.github/workflow/
-!.github/workflow/static.yaml
+!.github/workflows/static.yaml
