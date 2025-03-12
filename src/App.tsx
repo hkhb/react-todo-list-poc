@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import "./App.css"
-import Modal from './components/modal'
+import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
 
 export interface TodoItem {
@@ -50,7 +50,6 @@ function App() {
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
-          setShowModal={setShowModal}
           onCancel={cancelModal}
           onOk={okModal}
         >

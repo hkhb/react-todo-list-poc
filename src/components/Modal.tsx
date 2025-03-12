@@ -2,7 +2,6 @@ import './modal.css'
 interface modalProps{
   showFlag: boolean;
   children: React.ReactNode;
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onOk: () => void;
   onCancel: () => void;
 }
