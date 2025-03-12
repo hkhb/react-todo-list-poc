@@ -35,11 +35,12 @@ function App() {
   const closeModal = () =>{
     setShowModal(false);
   }
-  const HandleCancel = () => {
+  const cancelModal = () => {
     closeModal();
   };
-  const HandleOk = () => {
+  const okModal = () => {
     closeModal();
+    alert("OKボタンが押されました");
   }
 
   return (
@@ -50,8 +51,8 @@ function App() {
         <Modal
           showFlag={showModal}
           setShowModal={setShowModal}
-          cancelHandler={HandleCancel}
-          okHandler={HandleOk}
+          onCancel={cancelModal}
+          onOk={okModal}
         >
           <p>親から渡された値です。</p>
         </Modal>

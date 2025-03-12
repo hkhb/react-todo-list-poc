@@ -3,15 +3,15 @@ interface modalProps{
   showFlag: boolean;
   children: React.ReactNode;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  okHandler: () => void;
-  cancelHandler: () => void;
+  onOk: () => void;
+  onCancel: () => void;
 }
 
 
 function Modal({
     showFlag,
-    cancelHandler,
-    okHandler,
+    onCancel,
+    onOk,
     children
   }:modalProps){
   return(
@@ -19,10 +19,10 @@ function Modal({
       <div id="overlay" className="overlay" >
         <div id="modalContent" className="modalContent">
           <div>
-            <button id="topBotton" className='topButton' onClick={cancelHandler}>cancel</button>
+            <button id="topBotton" className='topButton' onClick={onCancel}>cancel</button>
             <h1>modal</h1>
             <div>{children}</div>
-            <button onClick={okHandler}>OK</button>
+            <button onClick={onOk}>OK</button>
           </div>
         </div>
       </div>
