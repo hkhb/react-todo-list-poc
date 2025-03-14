@@ -3,25 +3,18 @@ import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-	base: "./",
-	root: "src",
-	plugins: [react()],
-	publicDir: resolve(__dirname, "public"),
-	build: {
-		// distフォルダに出力
-		outDir: resolve(__dirname, "dist"),
-		// 存在しないときはフォルダを作成する
-		emptyOutDir: true,
-		copyPublicDir: true,
-		rollupOptions: {
-			// entry pointがあるindex.htmlのパス
-			input: {
-				"": resolve(__dirname, "src/index.html"),
-			},
-			// bundle.jsを差し替えする
-			output: {
-				entryFileNames: "assets/bundle.js",
-			},
-		},
-	},
+  base: "/react-todo-list-poc/",
+  plugins: [react()],
+  publicDir: resolve(__dirname, "public"),
+  build: {
+    outDir: resolve(__dirname, "dist"),
+    emptyOutDir: true,
+    copyPublicDir: true,
+    rollupOptions: {
+      input: resolve(__dirname, "index.html"),
+      output: {
+        entryFileNames: "assets/bundle.js",
+      },
+    },
+  },
 });
