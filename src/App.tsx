@@ -35,10 +35,10 @@ function App() {
   const closeModal = () =>{
     setShowModal(false);
   }
-  const cancelModal = () => {
+  const onModalCancel = () => {
     closeModal();
   };
-  const okModal = () => {
+  const onModalOk = () => {
     closeModal();
     alert("OKボタンが押されました");
   }
@@ -50,8 +50,8 @@ function App() {
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
-          onCancel={cancelModal}
-          onOk={okModal}
+          onCancel={onModalCancel}
+          onOk={onModalOk}
         >
           <p>親から渡された値です。</p>
         </Modal>
