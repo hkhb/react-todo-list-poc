@@ -4,7 +4,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	base: "./",
-	root: "src",
 	plugins: [react()],
 	publicDir: resolve(__dirname, "public"),
 	build: {
@@ -16,7 +15,7 @@ export default defineConfig({
 		rollupOptions: {
 			// entry pointがあるindex.htmlのパス
 			input: {
-				"": resolve(__dirname, "src/index.html"),
+				"": resolve(__dirname, "index.html"),
 			},
 			// bundle.jsを差し替えする
 			output: {
