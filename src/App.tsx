@@ -43,7 +43,6 @@ function App() {
     closeModal();
   };
   const onListClick = (todoItem:TodoItem) => {
-    alert(`ID: ${todoItem.id}`);
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
