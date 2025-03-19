@@ -34,7 +34,6 @@ const Lists: React.FC<TodoItemWithClick> = ({
           </p>
           <button className='delete-button' onClick={onClickDelete}>削除</button>
         </div>
-        
         <p className="todo-description" onClick={onClickEdit}>{description}</p>
       </div>
     )
