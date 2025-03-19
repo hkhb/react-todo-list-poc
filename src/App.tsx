@@ -27,6 +27,7 @@ const initialTodoItems:TodoItem[] = [
 
 function App() {
 
+  const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
