@@ -2,7 +2,6 @@ import React from 'react';
 import { format } from 'date-fns';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
-// import Modal from './Modal.tsx';
 
 interface TodoItemWithClick extends TodoItem {
   onClickEdit: () => void;
