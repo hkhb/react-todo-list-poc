@@ -31,27 +31,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
-  const [todoItems, setTodoItems] = useState<TodoItem[]>();
-
-  // useEffect(() => {
-  //   const storedItem = localStorage.getItem('todoItems');
-  //   if (storedItem !== null) {
-  //     const value: TodoItem[] = JSON.parse(storedItem);
-  //     setTodoItems(value);
-  //   }
-  // }, []); 
-
-  useEffect(() => {
-    const storedItem = localStorage.getItem('todoItems');
-    if (storedItem !== null) {
-      const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
-        ...item,
-        createdAt: new Date(item.createdAt),
-        updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
-      }));
-      setTodoItems(parsedItems);
-    }
-  }, []);
   
   //モーダルを開く
   //引数　なし
