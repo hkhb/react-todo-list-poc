@@ -13,6 +13,14 @@ function Modal({
     children
   }:modalProps){
 
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+
+  useEffect(() => {
+    setNewTitle(title);
+    setNewDescription(description);
+  }, [title, description, showFlag]);
+
   return(
     showFlag?(
       <div id="overlay" className="overlay" >
