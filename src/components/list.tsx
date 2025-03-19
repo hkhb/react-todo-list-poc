@@ -1,7 +1,6 @@
 import React from 'react';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
-// import Modal from './Modal.tsx';
 
 interface TodoItemWithClick extends TodoItem {
   onClick: () => void;
