@@ -157,6 +157,34 @@ function App() {
     setTodoItems(newtodoItems);
   }
   }
+  const onAddList = (title:string, description:string) => {
+    if(!!title){
+      const newTodo:TodoItem = {
+        id: todoItems.length + 1,
+        title,
+        description,
+        completed: false,
+        createdAt: new Date(),
+      }
+      setTodoItems([...todoItems, newTodo]);
+      closeModal();
+    }else{
+      alert("titleを入力してください")
+    }
+  }
+  //変更したものものを受取反映させる
+  // const onEditList = (title:string, description:string, id:number) => {
+  //   if(!title){
+  //     alert("titleを入力してください")
+  //     return;
+  //   }
+    
+  //   setTodoItems((prevItems) =>
+  //     prevItems.map((item) =>
+  //       item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+  //     ));
+  //     closeModal();
+  // }
 
   const list = editList? editList : undefined;
 
