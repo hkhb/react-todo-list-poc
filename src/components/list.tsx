@@ -1,6 +1,7 @@
 import React from 'react';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
+// import Modal from './Modal.tsx';
 
 interface TodoItemWithClick extends TodoItem {
   onClickEdit: () => void;
@@ -23,7 +24,6 @@ interface TodoItemWithClick extends TodoItem {
           </p>
           <button className='delete-button' onClick={onClickDelete}>削除</button>
         </div>
-        
         <p className="todo-description" onClick={onClickEdit}>{description}</p>
       </div>
     )
