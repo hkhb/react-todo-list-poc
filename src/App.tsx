@@ -38,6 +38,7 @@ function App() {
 
   const closeModal = () =>{
     setShowModal(false);
+    setIsEdit(false);
   }
   const onModalCancel = () => {
     closeModal();
@@ -72,8 +73,8 @@ function App() {
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-      ));
-      closeModal();
+    ));
+    closeModal();
   }
 
   return (
@@ -85,8 +86,8 @@ function App() {
           showFlag={showModal}
           onCancel={onModalCancel}
           onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
-          title={editList ? editList.title : ""}
-          description={editList?.description ?? ""}
+          title={(isEdit && editList) ? editList.title : ""}
+          description={(isEdit && editList)?editList.description ?? "" :""}
           modalTitle={isEdit ? "リスト編集" : "リスト追加"}
         >
         </Modal>
