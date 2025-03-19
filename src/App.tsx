@@ -29,6 +29,8 @@ function App() {
 
   const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
   const [showModal, setShowModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editList, setEditList] = useState<TodoItem>();
   
   const openModal = () =>{
     setShowModal(true);
@@ -40,16 +42,11 @@ function App() {
   const onModalCancel = () => {
     closeModal();
   };
-  const onListClick = () => {
-    return(
-      <Modal
-          showFlag={showModal}
-          onCancel={onModalCancel}
-          onOk={onAddList}
-          modalTitle="リスト編集"
-        >
-        </Modal>
-    )
+  const onListClick = (todoItem:TodoItem) => {
+    alert(`ID: ${todoItem.id}`);
+    setIsEdit(true);
+    setEditList(todoItem);
+    openModal();
   }
   const onAddList = (title:string, description:string) => {
     if(!!title){
@@ -66,19 +63,19 @@ function App() {
       alert("titleを入力してください")
     }
   }
-  //変更したものものを受取反映させる
-  // const onEditList = (title:string, description:string, id:number) => {
-  //   if(!title){
-  //     alert("titleを入力してください")
-  //     return;
-  //   }
+  // 変更したものものを受取反映させる
+  const onEditList = (title:string, description:string, id:number) => {
+    if(!title){
+      alert("titleを入力してください")
+      return;
+    }
     
-  //   setTodoItems((prevItems) =>
-  //     prevItems.map((item) =>
-  //       item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-  //     ));
-  //     closeModal();
-  // }
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+      ));
+      closeModal();
+  }
 
   return (
     <div className='container'>
@@ -88,8 +85,10 @@ function App() {
         <Modal
           showFlag={showModal}
           onCancel={onModalCancel}
-          onOk={onAddList}
-          modalTitle="新規追加"
+          onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
+          title={editList ? editList.title : ""}
+          description={editList?.description ?? ""}
+          modalTitle={isEdit ? "リスト編集" : "リスト追加"}
         >
         </Modal>
       </div>
@@ -98,7 +97,7 @@ function App() {
           <Lists
             key={todoItem.id}
             {...todoItem}
-            onClick={onListClick}
+            onClick={() => onListClick(todoItem)}
           /> 
         ))}
       </ul>

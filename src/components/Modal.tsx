@@ -6,6 +6,8 @@ interface modalProps{
   modalTitle:string;
   onOk: ( title: string, description: string, id?:number,) => void;
   onCancel: () => void;
+  title: string;
+  description: string;
 }
 
 
@@ -13,11 +15,17 @@ function Modal({
     showFlag,
     onCancel,
     onOk,
+    title,
+    description,
     modalTitle,
   }:modalProps){
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDescription, setNewDescription] = useState(description);
+  console.log(`title: ${title}`);
+  console.log(`newtitle: ${newTitle}`);
+  console.log(`description: ${description}`);
+  console.log(`newdescription: ${newDescription}`);
 
   return(
     showFlag?(
@@ -35,7 +43,7 @@ function Modal({
                     id="title"
                     name='title'
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={(e) => setNewTitle(e.target.value)}
                   />
                 </div>
                 <div id='description-field'>
@@ -45,12 +53,12 @@ function Modal({
                     id='description'
                     name='description'
                     value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) => setNewDescription(e.target.value)}
                   />
                 </div>
               </div>
             </div>
-            <button id='okButton' onClick={() => onOk(title, description)}>OK</button>
+            <button id='okButton' onClick={() => onOk(newTitle, newDescription)}>OK</button>
           </div>
         </div>
       </div>
