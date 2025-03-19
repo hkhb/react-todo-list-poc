@@ -162,14 +162,14 @@ function App() {
   //   if(!title){
   //     alert("titleを入力してください")
   //     return;
-  //   }
+  //   }7 (編集機能を実装)
     
-  //   setTodoItems((prevItems) =>
-  //     prevItems.map((item) =>
-  //       item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-  //     ));
-  //     closeModal();
-  // }
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+      ));
+      closeModal();
+  }
 
   const list = editList? editList : undefined;
 
