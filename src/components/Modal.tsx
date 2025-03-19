@@ -2,7 +2,6 @@ import './modal.css'
 import { useState, useEffect } from 'react';
 interface modalProps{
   showFlag: boolean;
-  // children: React.ReactNode;
   modalTitle:string;
   onOk: ( title: string, description: string) => void;
   onCancel: () => void;
