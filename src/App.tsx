@@ -172,19 +172,19 @@ function App() {
       alert("titleを入力してください")
     }
   }
-  //変更したものものを受取反映させる
-  // const onEditList = (title:string, description:string, id:number) => {
-  //   if(!title){
-  //     alert("titleを入力してください")
-  //     return;
-  //   }
+  // 変更したものものを受取反映させる
+  const onEditList = (title:string, description:string, id:number) => {
+    if(!title){
+      alert("titleを入力してください")
+      return;
+    }
     
-  //   setTodoItems((prevItems) =>
-  //     prevItems.map((item) =>
-  //       item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-  //     ));
-  //     closeModal();
-  // }
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+      ));
+      closeModal();
+  }
 
   const list = editList? editList : undefined;
 
