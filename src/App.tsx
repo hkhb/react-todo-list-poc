@@ -206,6 +206,19 @@ function App() {
     setTodoItems(newtodoItems);
   }
   }
+  //変更したものものを受取反映させる
+  // const onEditList = (title:string, description:string, id:number) => {
+  //   if(!title){
+  //     alert("titleを入力してください")
+  //     return;
+  //   }
+    
+  //   setTodoItems((prevItems) =>
+  //     prevItems.map((item) =>
+  //       item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+  //     ));
+  //     closeModal();
+  // }
 
   useEffect(() => {
     setNewTitle(ListTitle);
