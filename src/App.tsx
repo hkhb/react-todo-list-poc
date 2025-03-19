@@ -216,8 +216,8 @@ function App() {
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-      ));
-      closeModal();
+    ));
+    closeModal();
   }
 
   useEffect(() => {
