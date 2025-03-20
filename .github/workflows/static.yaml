@@ -17,41 +17,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'pnpm'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.10.0
+
       - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm ci && npm run build
-        # env:
-        #   PUBLIC_URL: /js
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
-
-  deploy:
-    needs: build
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
+          path: "./dist" # distフォルダにビルド結果があることを確認
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
