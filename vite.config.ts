@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-	base: "./",
+	base: '/react-todo-list-poc/',
 	plugins: [react()],
 	publicDir: path.resolve(__dirname, "public"),
 	build: {
