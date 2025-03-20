@@ -28,24 +28,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm'
-
-      - name: Enable pnpm (via corepack)
-        run: corepack enable
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.10.0
-
-      - name: Verify pnpm
-        run: pnpm --version  # これで pnpm が正常にインストールされたか確認
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci  # `npm install` よりも `ci` の方が速くて安定
 
       - name: Build project
-        run: pnpm run build
+        run: npm run build
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
@@ -53,7 +42,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: "./dist"  # distフォルダにビルド結果があることを確認
 
       - name: Deploy to GitHub Pages
         id: deployment
