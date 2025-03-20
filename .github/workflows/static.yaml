@@ -33,7 +33,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci  # `npm install` よりも `ci` の方が速くて安定
+        run: npm ci  # `npm install` よりも `ci` 　の方が速くて安定
 
       - name: Build project
         run: npm run build
