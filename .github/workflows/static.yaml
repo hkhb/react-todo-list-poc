@@ -30,18 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'pnpm'
-
-      - name: Enable pnpm (via corepack)
-        run: corepack enable
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.10.0
-
-      - name: Verify pnpm
-        run: pnpm --version  # これで pnpm が正常にインストールされたか確認
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
@@ -81,6 +70,5 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
