@@ -9,7 +9,6 @@ interface modalProps{
   description: string;
 }
 
-
 function Modal({
     showFlag,
     onCancel,
