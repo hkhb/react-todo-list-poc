@@ -100,6 +100,9 @@ function App() {
       setTodoItems(newtodoItems);
     }
   }
+  //新しいリストの追加
+  //引数　title, dedcriotion
+  //戻り値　なし
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newId:number = Math.max(0,...todoItems.map(item => item.id)) +1;
