@@ -22,10 +22,9 @@ export default defineConfig({
 			input: {
 				"": path.resolve(__dirname, "index.html"),
 			},
-			// bundle.jsを差し替えする
 			output: {
 				entryFileNames: "assets/bundle.js",
-				assetFileNames: "assets/[name]-[hash][extname]",
+				assetFileNames: "assets/[hash].css",
 			},
 		},
 	},
