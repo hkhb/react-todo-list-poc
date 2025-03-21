@@ -21,7 +21,7 @@ export default defineConfig({
       },
       output: {
         entryFileNames: "assets/bundle.js",
-        assetFileNames: "assets/[hash].css", // 画像などの静的アセット
+        assetFileNames: 'assets/[name]-[hash][extname]',
       },
     },
   },
