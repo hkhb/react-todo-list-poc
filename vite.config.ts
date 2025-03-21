@@ -16,6 +16,7 @@ export default defineConfig({
 		// 存在しないときはフォルダを作成する
 		emptyOutDir: true,
 		copyPublicDir: true,
+		cssCodeSplit: true,
 		rollupOptions: {
 			// entry pointがあるindex.htmlのパス
 			input: {
