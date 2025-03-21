@@ -172,7 +172,13 @@ function App() {
       alert("titleを入力してください")
     }
   }
-  // 変更したものものを受取反映させる
+  // 編集したものものを受取、リストに反映させる
+  //引数　title, dedcriotion, id
+  //titleがある場合
+  //戻り値　なし
+  //titleがない場合
+  //戻り値　なし
+  //titleがない場合は、alartを出す
   const onEditList = (title:string, description:string, id:number) => {
     if(!title){
       alert("titleを入力してください")
