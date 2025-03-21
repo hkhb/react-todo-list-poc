@@ -21,8 +21,7 @@ export default defineConfig({
       },
       output: {
         entryFileNames: "assets/bundle.js",
-				assetFileNames: "assets/[name]-[hash][extname]", // CSS と JS のファイル名パターンを設定
-        chunkFileNames: "assets/[name]-[hash].js",
+				assetFileNames: "assets/[hash].css"
       },
     },
   },
