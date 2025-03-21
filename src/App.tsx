@@ -12,7 +12,7 @@ export interface TodoItem {
   updatedAt?: Date;   // 更新日時（任意）
 }
 
-const todoItems:TodoItem[] = [
+const initialTodoItems:TodoItem[] = [
   {id : 1, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(2025, 3, 4), updatedAt: new Date(2025, 3, 4)},
   {id : 2, title: "洗濯", completed: true, createdAt: new Date(20250304)},
   {id : 3, title: "料理", description: "味噌汁", completed: false, createdAt: new Date(2025, 3, 4)},
@@ -27,20 +27,54 @@ const todoItems:TodoItem[] = [
 
 function App() {
 
+  const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
   const [showModal, setShowModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editList, setEditList] = useState<TodoItem>();
+  
   const openModal = () =>{
     setShowModal(true);
   }
 
   const closeModal = () =>{
     setShowModal(false);
+    setIsEdit(false);
   }
   const onModalCancel = () => {
     closeModal();
   };
-  const onModalOk = () => {
+  const onListClick = (todoItem:TodoItem) => {
+    setIsEdit(true);
+    setEditList(todoItem);
+    openModal();
+  }
+  const onAddList = (title:string, description:string) => {
+    if(!!title){
+      const newTodo:TodoItem = {
+        id: todoItems.length + 1,
+        title,
+        description,
+        completed: false,
+        createdAt: new Date(),
+      }
+      setTodoItems([...todoItems, newTodo]);
+      closeModal();
+    }else{
+      alert("titleを入力してください")
+    }
+  }
+  // 変更したものものを受取反映させる
+  const onEditList = (title:string, description:string, id:number) => {
+    if(!title){
+      alert("titleを入力してください")
+      return;
+    }
+    
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
+    ));
     closeModal();
-    alert("OKボタンが押されました");
   }
 
   return (
@@ -51,13 +85,21 @@ function App() {
         <Modal
           showFlag={showModal}
           onCancel={onModalCancel}
-          onOk={onModalOk}
+          onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
+          title={(isEdit && editList) ? editList.title : ""}
+          description={(isEdit && editList)?editList.description ?? "" :""}
+          modalTitle={isEdit ? "リスト編集" : "リスト追加"}
         >
-          <p>親から渡された値です。</p>
         </Modal>
       </div>
       <ul>
-        {todoItems.map((todoItem)=> (<Lists key={todoItem.id} {...todoItem}/> ))}
+        {todoItems.map((todoItem)=> (
+          <Lists
+            key={todoItem.id}
+            {...todoItem}
+            onClick={() => onListClick(todoItem)}
+          /> 
+        ))}
       </ul>
     </div>
   )

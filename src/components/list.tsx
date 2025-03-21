@@ -2,11 +2,17 @@ import React from 'react';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
 
-  const Lists : React.FC<TodoItem> = ({completed, title, description}) => {
+interface TodoItemWithClick extends TodoItem {
+  onClick: () => void;
+}
+  
+
+  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, onClick}) => {
+
     return(
-      <div className={`todo-item ${completed ? 'completed' : 'pending'}`}>
+      <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
         <div className="todo-title-field">
-          <h2 className="todo-title">{title}</h2>
+          <h2 className="todo-title" onClick={onClick}>{title}</h2>
           <p className="todo-status">
             {completed ? (
                   <span className="completed-icon">✔️ 完了</span>
@@ -16,7 +22,7 @@ import { TodoItem } from '../App.tsx'
           </p>
         </div>
         
-        <p className="todo-description">{description}</p>
+        <p className="todo-description" onClick={onClick}>{description}</p>
         </div>
     )
 }
