@@ -32,22 +32,36 @@ function App() {
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
   
+  //モーダルを開く
+  //引数　なし
+  //戻り値　なし
   const openModal = () =>{
     setShowModal(true);
   }
-
+  //モーダルを閉じる
+  //引数　なし
+  //戻り値　なし
   const closeModal = () =>{
     setShowModal(false);
     setIsEdit(false);
   }
+  //モーダルをキャンセル
+  //引数　なし
+  //戻り値　なし
   const onModalCancel = () => {
     closeModal();
   };
+  //listを受取、モーダルで編集する
+  //引数　todoItem
+  //戻り値　なし
   const onListClick = (todoItem:TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
   }
+  //新しいリストの追加
+  //引数　title, dedcriotion
+  //戻り値　なし
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newTodo:TodoItem = {
@@ -63,7 +77,13 @@ function App() {
       alert("titleを入力してください")
     }
   }
-  // 変更したものものを受取反映させる
+  // 編集したものものを受取、リストに反映させる
+  //引数　title, dedcriotion, id
+  //titleがある場合
+  //戻り値　なし
+  //titleがない場合
+  //戻り値　なし
+  //titleがない場合は、alartを出す
   const onEditList = (title:string, description:string, id:number) => {
     if(!title){
       alert("titleを入力してください")
