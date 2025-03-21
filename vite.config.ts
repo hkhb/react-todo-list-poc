@@ -14,14 +14,14 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
     copyPublicDir: true,
-		cssCodeSplit: false,
+		cssCodeSplit: true,
     rollupOptions: {
       input: {
         "": path.resolve(__dirname, "index.html"),
       },
       output: {
         entryFileNames: "assets/bundle.js",
-				assetFileNames: "assets/[name]-[hash].css", // CSS と JS のファイル名パターンを設定
+				assetFileNames: "assets/[name]-[hash][extname]", // CSS と JS のファイル名パターンを設定
         chunkFileNames: "assets/[name]-[hash].js",
       },
     },
