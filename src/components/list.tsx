@@ -4,7 +4,8 @@ import "./list.css";
 import { TodoItem } from "../App.tsx";
 
 interface TodoItemWithClick extends TodoItem {
-  onClick: () => void;
+  onClickEdit: () => void;
+  onClickDelete: () => void;
 }
 
 const Lists: React.FC<TodoItemWithClick> = ({

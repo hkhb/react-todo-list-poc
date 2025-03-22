@@ -107,6 +107,7 @@ function App() {
   //titleがある場合
   //戻り値　なし
   //titleがない場合
+  //alartを出す
   //戻り値　なし
   //titleがない場合は、alartを出す
   const onEditList = (title: string, description: string, id: number) => {
@@ -128,6 +129,31 @@ function App() {
       ),
     );
     closeModal();
+  }
+  //リストの削除
+  //引数 id
+  //idがある場合 
+  //alartを出す(削除OK？)
+  //戻り値なし
+  //idがない場合 
+  //alartを出す(idがない)
+  //戻り値なし 
+  //現在のtodolistを新しい変数で受け取る
+  //リストごとに分割
+  //idが同じでない場合、newtodolistに格納 
+  //idが同じ場合、何もしない
+  //setterでnewtodolistに変更
+  const onDelete = (id:number) =>{
+    if(!id){
+      alert("idがありません")
+      return;
+    }
+    const prevtodoItems:TodoItem[] = todoItems
+    const newtodoItems:TodoItem[] = 
+    prevtodoItems.filter((Item:TodoItem) => Item.id !== id
+    )
+    setTodoItems(newtodoItems);
+    alert("削除しますか？")
   }
 
   const list = editList? editList : undefined;
@@ -151,18 +177,16 @@ function App() {
           </div>
         </Modal>
       </div>
-      {todoItems? 
-        <ul>
-          {todoItems.map((todoItem)=> (
-            <Lists
-              key={todoItem.id}
-              {...todoItem}
-              onClick={() => onClickList(todoItem)}
-            /> 
-          ))}
-        </ul>
-      :<p>リストはありません</p>  
-      }
+      <ul>
+        {todoItems.map((todoItem) => (
+          <Lists
+            key={todoItem.id}
+            {...todoItem}
+            onClickEdit={() => onListClick(todoItem)}
+            onClickDelete={() => onDelete(todoItem.id)}
+          /> 
+        ))}
+      </ul>
     </div>
   );
 }
