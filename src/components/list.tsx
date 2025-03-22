@@ -3,17 +3,18 @@ import "./list.css"
 import { TodoItem } from '../App.tsx'
 
 interface TodoItemWithClick extends TodoItem {
-  onClick: () => void;
+  onClickEdit: () => void;
+  onClickDelete: () => void;
 }
   
 
-  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, onClick}) => {
+  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, onClickEdit, onClickDelete}) => {
 
     return(
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
         <div className="todo-title-field">
-          <h2 className="todo-title" onClick={onClick}>{title}</h2>
-          <p className="todo-status">
+          <h2 className="todo-title" onClick={onClickEdit}>{title}</h2>
+          <p className="todo-status" onClick={onClickDelete}>
             {completed ? (
                   <span className="completed-icon">✔️ 完了</span>
               ) : (
@@ -22,7 +23,7 @@ interface TodoItemWithClick extends TodoItem {
           </p>
         </div>
         
-        <p className="todo-description" onClick={onClick}>{description}</p>
+        <p className="todo-description" onClick={onClickEdit}>{description}</p>
         </div>
     )
 }
