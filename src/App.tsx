@@ -121,14 +121,13 @@ function App() {
   //titleがある場合
   //戻り値　なし
   //titleがない場合
+  //alartを出す
   //戻り値　なし
-  //titleがない場合は、alartを出す
   const onEditList = (title:string, description:string, id:number) => {
     if(!title){
       alert("titleを入力してください")
       return;
     }
-    
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
