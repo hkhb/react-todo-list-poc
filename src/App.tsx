@@ -54,7 +54,7 @@ function App() {
   //listを受取、モーダルで編集する
   //引数　todoItem
   //戻り値　なし
-  const onListClick = (todoItem:TodoItem) => {
+  const onClickList = (todoItem:TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
@@ -62,7 +62,6 @@ function App() {
   //新しいリストの追加
   //引数　title, dedcriotion
   //戻り値　なし
-<<<<<<< HEAD
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newTodo:TodoItem = {
