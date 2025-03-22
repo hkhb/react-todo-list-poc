@@ -3,8 +3,8 @@ name: Deploy static content to Pages
 on:
   push:
     branches: 
-      - "feature/*"
-      - "bugfix/*"
+      - feature/*
+      - bugfix/*
   workflow_dispatch:
 
 permissions:
