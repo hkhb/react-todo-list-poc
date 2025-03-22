@@ -20,7 +20,7 @@ export default defineConfig({
 		rollupOptions: {
 			// entry pointがあるindex.htmlのパス
 			input: {
-				"": path.resolve(__dirname, "index.html"),
+				index: path.resolve(__dirname, "index.html"),
 			},
 			output: {
 				entryFileNames: "assets/bundle.js",
