@@ -190,6 +190,11 @@ function App() {
     ));
     closeModal();
   }
+  //listの追加、編集のモーダル
+  // 引数　isEdit, editList, title, description, onEditList, onAddList
+  // 戻り値　モーダルの中身
+  // 案children
+  // ；
 
   return (
     <div className='container'>
