@@ -101,6 +101,12 @@ function App() {
   // 戻り値　モーダルの中身
   // 案children
   // ；
+  // const MondalContent = (
+  //   onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
+  //         title={(isEdit && editList) ? editList.title : ""}
+  //         description={(isEdit && editList)?editList.description ?? "" :""}
+  //         modalTitle={isEdit ? "リスト編集" : "リスト追加"}
+  // )
 
   return (
     <div className='container'>
@@ -110,11 +116,12 @@ function App() {
         <Modal
           showFlag={showModal}
           onCancel={onModalCancel}
-          onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
-          title={(isEdit && editList) ? editList.title : ""}
-          description={(isEdit && editList)?editList.description ?? "" :""}
-          modalTitle={isEdit ? "リスト編集" : "リスト追加"}
+          // onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
+          // title={(isEdit && editList) ? editList.title : ""}
+          // description={(isEdit && editList)?editList.description ?? "" :""}
+          // modalTitle={isEdit ? "リスト編集" : "リスト追加"}
         >
+          
         </Modal>
       </div>
       <ul>
