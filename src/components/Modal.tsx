@@ -11,15 +11,19 @@ function Modal({
     showFlag,
     onCancel,
     children
+    //onOk,
+    // title,
+    // description,
+    // modalTitle,
   }:modalProps){
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
+  // const [newTitle, setNewTitle] = useState("");
+  // const [newDescription, setNewDescription] = useState("");
 
-  useEffect(() => {
-    setNewTitle(title);
-    setNewDescription(description);
-  }, [title, description, showFlag]);
+  // useEffect(() => {
+  //   setNewTitle(title);
+  //   setNewDescription(description);
+  // }, [title, description, showFlag]);
 
   return(
     showFlag?(
@@ -28,6 +32,7 @@ function Modal({
           <div>
             <button id="topBotton" onClick={onCancel}>cancel</button>
             {children}
+            {/* <button id='okButton' onClick={() => onOk()}>OK</button> */}
           </div>
         </div>
       </div>
