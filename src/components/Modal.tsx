@@ -1,31 +1,17 @@
 import './modal.css'
-import { useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 interface modalProps{
   showFlag: boolean;
-  // modalTitle:string;
-  // onOk: ( title: string, description: string) => void;
   onCancel: () => void;
-  // title: string;
-  // description: string;
+  children?: ReactNode;
 }
 
 
 function Modal({
     showFlag,
     onCancel,
-    //onOk,
-    // title,
-    // description,
-    // modalTitle,
+    children
   }:modalProps){
-
-  // const [newTitle, setNewTitle] = useState("");
-  // const [newDescription, setNewDescription] = useState("");
-
-  // useEffect(() => {
-  //   setNewTitle(title);
-  //   setNewDescription(description);
-  // }, [title, description, showFlag]);
 
   return(
     showFlag?(
@@ -33,7 +19,7 @@ function Modal({
         <div id="modalContent" className="modalContent">
           <div>
             <button id="topBotton" onClick={onCancel}>cancel</button>
-            {/* <button id='okButton' onClick={() => onOk()}>OK</button> */}
+            {children}
           </div>
         </div>
       </div>
