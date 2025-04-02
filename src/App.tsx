@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect,} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
@@ -190,17 +190,30 @@ function App() {
     ));
     closeModal();
   }
+  
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
+  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+
   //listの追加、編集のモーダル
-  // 引数　isEdit, editList, title, description, onEditList, onAddList
-  // 戻り値　モーダルの中身
-  // 案children
-  // ；
-  // const MondalContent = (
-  //   onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
-  //         title={(isEdit && editList) ? editList.title : ""}
-  //         description={(isEdit && editList)?editList.description ?? "" :""}
-  //         modalTitle={isEdit ? "リスト編集" : "リスト追加"}
-  // )
+  // 引数　なし
+  // 戻り値　なし
+  // isEditとeditListがあればonEditListを実行
+  // なければonAddListを実行
+
+  function onOk(){
+    if(isEdit&&editList){
+      onEditList(newTitle, newDescription, editList.id);
+    }else{
+      onAddList(newTitle, newDescription);
+    }
+  };
+
+  useEffect(() => {
+    setNewTitle(ListTitle);
+    setNewDescription(ListDescription);
+  }, [ListTitle, ListDescription, showModal]);
 
   return (
     <div className='container'>
@@ -210,12 +223,31 @@ function App() {
         <Modal
           showFlag={showModal}
           onCancel={onModalCancel}
-          // onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
-          // title={(isEdit && editList) ? editList.title : ""}
-          // description={(isEdit && editList)?editList.description ?? "" :""}
-          // modalTitle={isEdit ? "リスト編集" : "リスト追加"}
         >
-          
+          <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
+          <div id="form-container">
+            <div id='title-field'>
+              <label>タイトル</label>
+              <input
+                type="text"
+                id="title"
+                name='title'
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+              />
+            </div>
+            <div id='description-field'>
+              <label>詳細</label>
+              <input
+                type="text"
+                id='description'
+                name='description'
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+              />
+            </div>
+            <button id='okButton' onClick={onOk}>OK</button>
+          </div>
         </Modal>
       </div>
       <ul>
