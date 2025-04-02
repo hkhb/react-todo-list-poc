@@ -119,22 +119,7 @@ function App() {
   useEffect(() => {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal, todoItems]);
-
-  useEffect(() => {
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
-  }, [todoItems]);
-  //listの追加、編集のモーダル
-  // 引数　isEdit, editList, title, description, onEditList, onAddList
-  // 戻り値　モーダルの中身
-  // 案children
-  // ；
-  // const MondalContent = (
-  //   onOk={isEdit&&editList ? (title, description) => {onEditList(title, description, editList.id)} : onAddList}
-  //         title={(isEdit && editList) ? editList.title : ""}
-  //         description={(isEdit && editList)?editList.description ?? "" :""}
-  //         modalTitle={isEdit ? "リスト編集" : "リスト追加"}
-  // )
+  }, [ListTitle, ListDescription, showModal]);
 
   return (
     <div className='container'>
