@@ -21,27 +21,22 @@ const Lists: React.FC<TodoItemWithClick> = ({
     "yyyy-MM-dd HH:mm",
   );
 
-  return (
-    <div className={`todo-item ${completed ? "completed" : "pending"}`}>
-      <div className="todo-title-field">
-        <h2 className="todo-title" onClick={onClick}>
-          {title}
-        </h2>
-        <p className="todo-status">
-          {completed ? (
-            <span className="completed-icon">✔️ 完了</span>
-          ) : (
-            <span className="pending-icon">❌ 未完了</span>
-          )}
-        </p>
+    return(
+      <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
+        <div className="todo-title-field">
+          <h2 className="todo-title" onClick={onClickEdit}>{title}</h2>
+          <p className="todo-status" onClick={onClickDelete}>
+            {completed ? (
+                  <span className="completed-icon">✔️ 完了</span>
+              ) : (
+                  <span className="pending-icon">❌ 未完了</span>
+              )}
+          </p>
+          <button className='delete-button' onClick={onClickDelete}>削除</button>
+        </div>
+        
+        <p className="todo-description" onClick={onClickEdit}>{description}</p>
       </div>
-      <div>
-        <p className="todo-description" onClick={onClick}>
-          {description}
-        </p>
-        <p className="todo-time">{displayDate}</p>
-      </div>
-    </div>
-  );
-};
+    )
+}
 export default Lists;
