@@ -148,12 +148,14 @@ function App() {
       alert("idがありません")
       return;
     }
+    const confirm = window.confirm("本当に削除しますか？");
+    if(confirm){
     const prevtodoItems:TodoItem[] = todoItems
     const newtodoItems:TodoItem[] = 
     prevtodoItems.filter((Item:TodoItem) => Item.id !== id
     )
     setTodoItems(newtodoItems);
-    alert("削除しますか？")
+  }
   }
 
   const list = editList? editList : undefined;
