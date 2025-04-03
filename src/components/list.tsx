@@ -21,10 +21,11 @@ interface TodoItemWithClick extends TodoItem {
                   <span className="pending-icon">❌ 未完了</span>
               )}
           </p>
+          <button className='delete-button' onClick={onClickDelete}>削除</button>
         </div>
         
         <p className="todo-description" onClick={onClickEdit}>{description}</p>
-        </div>
+      </div>
     )
 }
 export default Lists;
