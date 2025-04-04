@@ -1,4 +1,4 @@
-import './modal.css'
+import './Modal.css'
 import { useState, useEffect } from 'react';
 interface modalProps{
   showFlag: boolean;
