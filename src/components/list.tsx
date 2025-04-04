@@ -25,7 +25,7 @@ const Lists: React.FC<TodoItemWithClick> = ({
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
         <div className="todo-title-field">
           <h2 className="todo-title" onClick={onClickEdit}>{title}</h2>
-          <p className="todo-status" onClick={onClickDelete}>
+          <p className="todo-status">
             {completed ? (
                   <span className="completed-icon">✔️ 完了</span>
               ) : (
