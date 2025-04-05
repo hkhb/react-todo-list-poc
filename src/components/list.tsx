@@ -8,7 +8,7 @@ interface TodoItemWithClick extends TodoItem {
 }
   
 
-  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, onClick, onSetComplete}) => {
+  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClick, onSetComplete}) => {
 
     return(
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
@@ -22,9 +22,11 @@ interface TodoItemWithClick extends TodoItem {
               )}
           </p>
         </div>
-        
-        <p className="todo-description" onClick={onClick}>{description}</p>
+        <div>
+          <p className="todo-description" onClick={onClick}>{description}</p>
+          <p className='todo-time'>{updatedAt ? updatedAt : createdAt}</p>
         </div>
+      </div>
     )
 }
 export default Lists;
