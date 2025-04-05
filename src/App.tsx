@@ -62,41 +62,6 @@ function App() {
   //新しいリストの追加
   //引数　title, dedcriotion
   //戻り値　なし
-<<<<<<< HEAD
-  const onAddList = (title:string, description:string) => {
-    if(!!title){
-      const newTodo:TodoItem = {
-        id: todoItems.length + 1,
-        title,
-        description,
-        completed: false,
-        createdAt: new Date(),
-      }
-      setTodoItems([...todoItems, newTodo]);
-      closeModal();
-    }else{
-      alert("titleを入力してください")
-    }
-  }
-  // 編集したものものを受取、リストに反映させる
-  //引数　title, dedcriotion, id
-  //titleがある場合
-  //戻り値　なし
-  //titleがない場合
-  //戻り値　なし
-  //titleがない場合は、alartを出す
-  const onEditList = (title:string, description:string, id:number) => {
-    if(!title){
-      alert("titleを入力してください")
-      return;
-    }
-    
-    setTodoItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-    ));
-    closeModal();
-  }
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newTodo:TodoItem = {
@@ -159,12 +124,12 @@ function App() {
   const ItemModal = (
     <div>
       <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
+      <div className="form-container">
+        <div className='title-field'>
           <label>タイトル</label>
           <input
             type="text"
-            id="title"
+            className="title"
             name='title'
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
@@ -174,12 +139,13 @@ function App() {
           <label>詳細</label>
           <input
             type="text"
-            id='description'
+            className='description'
             name='description'
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
         </div>
+        <button className='okButton' onClick={onOk}>OK</button>
       </div>
     </div>
   );

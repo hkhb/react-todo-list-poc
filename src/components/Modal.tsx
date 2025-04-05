@@ -18,7 +18,7 @@ function Modal({
       <div id="overlay" className="overlay" >
         <div id="modalContent" className="modalContent">
           <div>
-            <button id="topBotton" onClick={onCancel}>cancel</button>
+            <button className="topBotton" onClick={onCancel}>cancel</button>
             {children}
           </div>
         </div>
