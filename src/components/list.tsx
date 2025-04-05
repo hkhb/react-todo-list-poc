@@ -9,11 +9,8 @@ interface TodoItemWithClick extends TodoItem {
 }
 
   const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClickEdit, onClickDelete}) => {
+    const displayDate = format(updatedAt ? updatedAt : createdAt, 'yyyy-MM-dd HH:mm');
 
-const displayDate = format(
-  updatedAt ? updatedAt : createdAt,
-  "yyyy-MM-dd HH:mm",
-);
     return(
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
         <div className="todo-title-field">
@@ -29,7 +26,7 @@ const displayDate = format(
         </div>
         <div>
           <p className="todo-description" onClick={onClickEdit}>{description}</p>
-          <p className='todo-time'>{updatedAt ? updatedAt : createdAt}</p>
+          <p className='todo-time'>{displayDate}</p>
         </div>
       </div>
     )
