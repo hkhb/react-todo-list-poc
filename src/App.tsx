@@ -124,12 +124,12 @@ function App() {
   const ItemModal = (
     <div>
       <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
+      <div className="form-container">
+        <div className='title-field'>
           <label>タイトル</label>
           <input
             type="text"
-            id="title"
+            className="title"
             name='title'
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
@@ -139,12 +139,13 @@ function App() {
           <label>詳細</label>
           <input
             type="text"
-            id='description'
+            className='description'
             name='description'
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
         </div>
+        <button className='okButton' onClick={onOk}>OK</button>
       </div>
     </div>
   );

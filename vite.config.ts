@@ -1,25 +1,30 @@
-import { resolve } from "node:path";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default defineConfig({
-	base: "./",
+	base: '/react-todo-list-poc/',
 	plugins: [react()],
-	publicDir: resolve(__dirname, "public"),
+	publicDir: path.resolve(__dirname, "public"),
 	build: {
 		// distフォルダに出力
-		outDir: resolve(__dirname, "dist"),
+		outDir: path.resolve(__dirname, "dist"),
 		// 存在しないときはフォルダを作成する
 		emptyOutDir: true,
 		copyPublicDir: true,
+		cssCodeSplit: true,
 		rollupOptions: {
 			// entry pointがあるindex.htmlのパス
 			input: {
-				"": resolve(__dirname, "index.html"),
+				index: path.resolve(__dirname, "index.html"),
 			},
-			// bundle.jsを差し替えする
 			output: {
 				entryFileNames: "assets/bundle.js",
+				assetFileNames: "assets/[hash].css",
 			},
 		},
 	},
