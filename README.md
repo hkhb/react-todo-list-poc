@@ -1,56 +1,40 @@
-# React + TypeScript + Vite
+# ReactTodoList
 
 DEMOのリンクhttps://hkhb.github.io/react-todo-list-poc/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 概要
+ReactとTypeScriptで実装したシンプルなTodoアプリです。  
+タスクの追加・編集・削除ができ、モーダルによるUI操作を体験できます。
 
-Currently, two official plugins are available:
+## 機能一覧
+- タスク（リスト）の追加
+- タスクの編集（モーダルUI）
+- タスクの削除
+- 作成・編集時間の表示（date.fns使用）
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 使用技術
+### フロントエンド
+- HTML/CSS
+- TypeScript (ES6)
+- React
 
-## Expanding the ESLint configuration
+### その他
+- GitHub Actions
+- date.fns（日付処理ライブラリ）
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 画面キャプチャ
+準備中
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 工夫した点 / 苦労した点
+- **モーダルコンポーネントを自作し、汎用的に使えるよう設計**
+  - childrenを使って中身を柔軟に差し替えられるように工夫
+- **日付表示ライブラリの選定**
+  - 型定義ができ、標準に近く関数的なdate.fnsを採用
+  比較検討記事: https://qiita.com/hkhb/items/d1c2e9180971c7319ff2
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 今後の改善点（ToDo）
+- カテゴリや優先するものがわかるようにする。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ライセンス
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+MIT
