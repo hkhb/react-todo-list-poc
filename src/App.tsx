@@ -62,41 +62,6 @@ function App() {
   //新しいリストの追加
   //引数　title, dedcriotion
   //戻り値　なし
-<<<<<<< HEAD
-  const onAddList = (title:string, description:string) => {
-    if(!!title){
-      const newTodo:TodoItem = {
-        id: todoItems.length + 1,
-        title,
-        description,
-        completed: false,
-        createdAt: new Date(),
-      }
-      setTodoItems([...todoItems, newTodo]);
-      closeModal();
-    }else{
-      alert("titleを入力してください")
-    }
-  }
-  // 編集したものものを受取、リストに反映させる
-  //引数　title, dedcriotion, id
-  //titleがある場合
-  //戻り値　なし
-  //titleがない場合
-  //戻り値　なし
-  //titleがない場合は、alartを出す
-  const onEditList = (title:string, description:string, id:number) => {
-    if(!title){
-      alert("titleを入力してください")
-      return;
-    }
-    
-    setTodoItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-    ));
-    closeModal();
-  }
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newTodo:TodoItem = {
