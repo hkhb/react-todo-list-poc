@@ -8,19 +8,12 @@ interface TodoItemWithClick extends TodoItem {
   onClickDelete: () => void;
 }
 
-const Lists: React.FC<TodoItemWithClick> = ({
-  completed,
-  title,
-  description,
-  createdAt,
-  updatedAt,
-  onClick,
-}) => {
-  const displayDate = format(
-    updatedAt ? updatedAt : createdAt,
-    "yyyy-MM-dd HH:mm",
-  );
+  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClickEdit, onClickDelete}) => {
 
+const displayDate = format(
+  updatedAt ? updatedAt : createdAt,
+  "yyyy-MM-dd HH:mm",
+);
     return(
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
         <div className="todo-title-field">
@@ -34,7 +27,10 @@ const Lists: React.FC<TodoItemWithClick> = ({
           </p>
           <button className='delete-button' onClick={onClickDelete}>削除</button>
         </div>
-        <p className="todo-description" onClick={onClickEdit}>{description}</p>
+        <div>
+          <p className="todo-description" onClick={onClickEdit}>{description}</p>
+          <p className='todo-time'>{updatedAt ? updatedAt : createdAt}</p>
+        </div>
       </div>
     )
 }
