@@ -1,4 +1,4 @@
-#overlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,18 +10,18 @@
   justify-content: center;
 }
 
-#modalContent {
-  background: #ffffff;
+.modalContent {
+  background: #FFFFFF;
   padding: 10px;
   border-radius: 3px;
   color: #000000;
 }
 
-#topBotton {
+.topBotton {
   display: flex;
   margin-left: auto;
 }
-#okButton {
+.okButton {
   width: 100%;
   padding: 12px;
   background-color: #3498db;
@@ -32,10 +32,10 @@
   cursor: pointer;
 }
 
-#okButton:hover {
+.okButton:hover {
   background-color: #2980b9;
 }
 
-#okButton:active {
+.okButton:active {
   background-color: #1f6d98;
 }
