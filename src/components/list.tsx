@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
 
@@ -24,7 +25,7 @@ interface TodoItemWithClick extends TodoItem {
         </div>
         <div>
           <p className="todo-description" onClick={onClick}>{description}</p>
-          <p className='todo-time'>{updatedAt ? updatedAt : createdAt}</p>
+          <p className='todo-time'>{displayDate}</p>
         </div>
       </div>
     )
