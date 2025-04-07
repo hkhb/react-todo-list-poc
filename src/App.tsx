@@ -131,7 +131,8 @@ function App() {
   useEffect(() => {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal]);
+    localStorage.setItem('key', 'todoItems');
+  }, [ListTitle, ListDescription, showModal, todoItems]);
 
   const ItemModal = (
     <div>
