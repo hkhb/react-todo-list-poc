@@ -120,6 +120,12 @@ function App() {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
     localStorage.setItem('key', 'todoItems');
+    const storedItem = localStorage.getItem('Key');
+
+  if (storedItem !== null) {
+    const value:TodoItem[] = JSON.parse(storedItem);
+    setTodoItems(value);
+  }
   }, [ListTitle, ListDescription, showModal, todoItems]);
 
   return (
