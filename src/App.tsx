@@ -34,11 +34,13 @@ function App() {
   const [editList, setEditList] = useState<TodoItem>();
   const [showList, setShowList] = useState<TodoItem[]>([]);
 
-  // const storedItem = localStorage.getItem('todoItems');
-  //   if (storedItem !== null) {
-  //     const value:TodoItem[] = JSON.parse(storedItem);
-  //     setTodoItems(value);
-  //   }
+  useEffect(() => {
+    const storedItem = localStorage.getItem('todoItems');
+    if (storedItem !== null) {
+      const value: TodoItem[] = JSON.parse(storedItem);
+      setTodoItems(value);
+    }
+  }, []); // ← 空の依存配列が重要！これで初回レンダー時のみ実行される
   
   //モーダルを開く
   //引数　なし
@@ -80,7 +82,7 @@ function App() {
         createdAt: new Date(),
       }
       setTodoItems([...todoItems, newTodo]);
-      // localStorage.setItem('todoItems', JSON.stringify(todoItems));
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -103,7 +105,7 @@ function App() {
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
     ));
-    // localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
   
