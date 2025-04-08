@@ -31,6 +31,12 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+
+  // const storedItem = localStorage.getItem('todoItems');
+  //   if (storedItem !== null) {
+  //     const value:TodoItem[] = JSON.parse(storedItem);
+  //     setTodoItems(value);
+  //   }
   
   //モーダルを開く
   //引数　なし
@@ -72,6 +78,7 @@ function App() {
         createdAt: new Date(),
       }
       setTodoItems([...todoItems, newTodo]);
+      // localStorage.setItem('todoItems', JSON.stringify(todoItems));
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -94,6 +101,7 @@ function App() {
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
     ));
+    // localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
   
@@ -119,13 +127,6 @@ function App() {
   useEffect(() => {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
-    localStorage.setItem('key', 'todoItems');
-    const storedItem = localStorage.getItem('Key');
-
-  if (storedItem !== null) {
-    const value:TodoItem[] = JSON.parse(storedItem);
-    setTodoItems(value);
-  }
   }, [ListTitle, ListDescription, showModal, todoItems]);
 
   return (
