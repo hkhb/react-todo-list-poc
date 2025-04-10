@@ -27,18 +27,30 @@ const initialTodoItems:TodoItem[] = [
 
 function App() {
 
-  const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+  const [todoItems, setTodoItems] = useState<TodoItem[]>();
+
+  // useEffect(() => {
+  //   const storedItem = localStorage.getItem('todoItems');
+  //   if (storedItem !== null) {
+  //     const value: TodoItem[] = JSON.parse(storedItem);
+  //     setTodoItems(value);
+  //   }
+  // }, []); 
 
   useEffect(() => {
     const storedItem = localStorage.getItem('todoItems');
     if (storedItem !== null) {
-      const value: TodoItem[] = JSON.parse(storedItem);
-      setTodoItems(value);
+      const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
+        ...item,
+        createdAt: new Date(item.createdAt),
+        updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+      }));
+      setTodoItems(parsedItems);
     }
-  }, []); // ← 空の依存配列が重要！これで初回レンダー時のみ実行される
+  }, []);
   
   //モーダルを開く
   //引数　なし
@@ -80,7 +92,6 @@ function App() {
         createdAt: new Date(),
       }
       setTodoItems([...todoItems, newTodo]);
-      localStorage.setItem('todoItems', JSON.stringify(todoItems));
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -103,7 +114,6 @@ function App() {
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
     ));
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
   
@@ -130,6 +140,10 @@ function App() {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
   }, [ListTitle, ListDescription, showModal, todoItems]);
+
+  useEffect(() => {
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  }, [todoItems]);
 
   return (
     <div className='container'>
@@ -166,15 +180,18 @@ function App() {
           </div>
         </Modal>
       </div>
-      <ul>
-        {todoItems.map((todoItem)=> (
-          <Lists
-            key={todoItem.id}
-            {...todoItem}
-            onClick={() => onClickList(todoItem)}
-          /> 
-        ))}
-      </ul>
+      {todoItems? 
+        <ul>
+          {todoItems.map((todoItem)=> (
+            <Lists
+              key={todoItem.id}
+              {...todoItem}
+              onClick={() => onClickList(todoItem)}
+            /> 
+          ))}
+        </ul>
+      :<p>リストはありません</p>  
+      }
     </div>
   )
 }
