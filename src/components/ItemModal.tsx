@@ -7,7 +7,7 @@ function ItemModal(ListTitle, ListDescription, isEdit, onOk){
   useEffect(() => {
       setNewTitle(ListTitle);
       setNewDescription(ListDescription);
-    }, [ListTitle, ListDescription, showModal]);
+    }, [ListTitle, ListDescription]);
 
   return(
   <div>
