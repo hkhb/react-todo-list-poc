@@ -142,8 +142,9 @@ function App() {
   }
   const onAddList = (title:string, description:string) => {
     if(!!title){
+      const newId:number = Math.max(0,...todoItems.map(item => item.id)) +1;
       const newTodo:TodoItem = {
-        id: todoItems.Math.max + 1,
+        id: newId,
         title,
         description,
         completed: false,
