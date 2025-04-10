@@ -72,26 +72,6 @@ function App() {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
-  };
-
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const ListTitle: string = isEdit && editList ? editList.title : "";
-  const ListDescription: string =
-    isEdit && editList ? (editList.description ?? "") : "";
-
-  //listの追加、編集のモーダル
-  // 引数　なし
-  // 戻り値　なし
-  // isEditとeditListがあればonEditListを実行
-  // なければonAddListを実行
-
-  function onOk() {
-    if (isEdit && editList) {
-      onEditList(newTitle, newDescription, editList.id);
-    } else {
-      onAddList(newTitle, newDescription);
-    }
   }
   //リストの削除
   //引数 id
@@ -123,29 +103,13 @@ function App() {
   const onAddList = (title:string, description:string) => {
     if(!!title){
       const newTodo:TodoItem = {
-        id: todoItems.length + 1,
+        id: todoItems.Math.max + 1,
         title,
         description,
         completed: false,
         createdAt: new Date(),
       }
       setTodoItems([...todoItems, newTodo]);
-      closeModal();
-    }else{
-      alert("titleを入力してください")
-    }
-  }
-  // 変更したものものを受取反映させる
-  const onEditList = (title:string, description:string, id:number) => {
-    if(!title){
-      alert("titleを入力してください")
-      return;
-    }
-    
-    setTodoItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-      ));
       closeModal();
   }
   
@@ -199,7 +163,7 @@ function App() {
           <Lists
             key={todoItem.id}
             {...todoItem}
-            onClickEdit={() => onListClick(todoItem)}
+            onClickEdit={() => onClickList(todoItem)}
             onClickDelete={() => onDelete(todoItem.id)}
           /> 
         ))}
