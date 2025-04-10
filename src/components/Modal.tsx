@@ -1,5 +1,5 @@
 import './Modal.css'
-import { useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 interface modalProps{
   showFlag: boolean;
   onCancel: () => void;
