@@ -200,34 +200,34 @@ function App() {
     setNewDescription(ListDescription);
   }, [ListTitle, ListDescription, showModal]);
 
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id="title-field">
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id="description-field">
-          <label>詳細</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-        </div>
-        <button className='okButton' onClick={onOk}>OK</button>
-      </div>
-    </div>
-  );
+  // const ItemModal = (
+  //   <div>
+  //     <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
+  //     <div className="form-container">
+  //       <div className='title-field'>
+  //         <label>タイトル</label>
+  //         <input
+  //           type="text"
+  //           className="title"
+  //           name='title'
+  //           value={newTitle}
+  //           onChange={(e) => setNewTitle(e.target.value)}
+  //         />
+  //       </div>
+  //       <div id='description-field'>
+  //         <label>詳細</label>
+  //         <input
+  //           type="text"
+  //           className='description'
+  //           name='description'
+  //           value={newDescription}
+  //           onChange={(e) => setNewDescription(e.target.value)}
+  //         />
+  //       </div>
+  //       <button className='okButton' onClick={onOk}>OK</button>
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className="container">
@@ -238,7 +238,15 @@ function App() {
           showFlag={showModal}
           onCancel={onModalCancel}
         >
-          {ItemModal}
+          <div>
+            <ItemModal
+              ListTitle={ListTitle}
+              ListDescription={ListDescription}
+              isEdit={isEdit}
+              onOk={onOk}
+              >
+            </ItemModal>
+          </div>
         </Modal>
       </div>
       <ul>
