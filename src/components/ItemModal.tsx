@@ -1,6 +1,14 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 
-function ItemModal(ListTitle, ListDescription, isEdit, onOk){
+interface ItemModalProps {
+  ListTitle: any;
+  ListDescription: any;
+  isEdit: any;
+  onOk: any;
+}
+
+const ItemModal: React.FC<ItemModalProps> = ({ ListTitle, ListDescription, isEdit, onOk }) => {
 
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
