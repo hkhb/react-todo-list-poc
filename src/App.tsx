@@ -98,8 +98,8 @@ function App() {
     closeModal();
   }
   
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
+  // const [newTitle, setNewTitle] = useState("");
+  // const [newDescription, setNewDescription] = useState("");
   const ListTitle:string = ((isEdit && editList) ? editList.title : "");
   const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
 
@@ -109,18 +109,18 @@ function App() {
   // isEditとeditListがあればonEditListを実行
   // なければonAddListを実行
 
-  function onOk(){
-    if(isEdit&&editList){
-      onEditList(newTitle, newDescription, editList.id);
-    }else{
-      onAddList(newTitle, newDescription);
-    }
-  };
+  // function onOk(){
+  //   if(isEdit&&editList){
+  //     onEditList(newTitle, newDescription, editList.id);
+  //   }else{
+  //     onAddList(newTitle, newDescription);
+  //   }
+  // };
 
-  useEffect(() => {
-    setNewTitle(ListTitle);
-    setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal]);
+  // useEffect(() => {
+  //   setNewTitle(ListTitle);
+  //   setNewDescription(ListDescription);
+  // }, [ListTitle, ListDescription, showModal]);
 
   // const ItemModal = (
   //   <div>
@@ -162,10 +162,10 @@ function App() {
         >
           <div>
             <ItemModal
-              ListTitle={ListTitle}
-              ListDescription={ListDescription}
+              editList={editList}
               isEdit={isEdit}
-              onOk={onOk}
+              onEditList={onEditList}
+              onAddList={onAddList}
               >
             </ItemModal>
           </div>
