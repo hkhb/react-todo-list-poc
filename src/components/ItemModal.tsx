@@ -2,16 +2,27 @@ import React from 'react';
 import { useState, useEffect } from "react";
 
 interface ItemModalProps {
-  ListTitle: any;
-  ListDescription: any;
-  isEdit: any;
-  onOk: any;
+  editList: any;
+  isEdit: boolean;
+  onEditList: (title:string, description:string, id:number) => void;
+  onAddList: (title:string, description:string) => void;
 }
 
-const ItemModal: React.FC<ItemModalProps> = ({ ListTitle, ListDescription, isEdit, onOk }) => {
+const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onAddList }) => {
 
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
+  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+
+  function onOk(){
+    if(isEdit&&editList){
+      onEditList(newTitle, newDescription, editList.id);
+    }else{
+      onAddList(newTitle, newDescription);
+    }
+  };
+
   useEffect(() => {
       setNewTitle(ListTitle);
       setNewDescription(ListDescription);
