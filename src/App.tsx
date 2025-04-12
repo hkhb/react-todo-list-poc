@@ -97,59 +97,6 @@ function App() {
     ));
     closeModal();
   }
-  
-  // const [newTitle, setNewTitle] = useState("");
-  // const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
-
-  //listの追加、編集のモーダル
-  // 引数　なし
-  // 戻り値　なし
-  // isEditとeditListがあればonEditListを実行
-  // なければonAddListを実行
-
-  // function onOk(){
-  //   if(isEdit&&editList){
-  //     onEditList(newTitle, newDescription, editList.id);
-  //   }else{
-  //     onAddList(newTitle, newDescription);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   setNewTitle(ListTitle);
-  //   setNewDescription(ListDescription);
-  // }, [ListTitle, ListDescription, showModal]);
-
-  // const ItemModal = (
-  //   <div>
-  //     <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-  //     <div className="form-container">
-  //       <div className='title-field'>
-  //         <label>タイトル</label>
-  //         <input
-  //           type="text"
-  //           className="title"
-  //           name='title'
-  //           value={newTitle}
-  //           onChange={(e) => setNewTitle(e.target.value)}
-  //         />
-  //       </div>
-  //       <div id='description-field'>
-  //         <label>詳細</label>
-  //         <input
-  //           type="text"
-  //           className='description'
-  //           name='description'
-  //           value={newDescription}
-  //           onChange={(e) => setNewDescription(e.target.value)}
-  //         />
-  //       </div>
-  //       <button className='okButton' onClick={onOk}>OK</button>
-  //     </div>
-  //   </div>
-  // );
 
   return (
     <div className='container'>
