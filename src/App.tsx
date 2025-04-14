@@ -45,6 +45,7 @@ function App() {
         setTodoItems(parsedItems);
       }else{
       setTodoItems(undefined);
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
     }
   }, []);
 
@@ -127,6 +128,17 @@ function App() {
     ));
     closeModal();
   }
+  const onSetComplete = (todoItem:TodoItem) => {
+    if(!todoItem.id){
+      alert("もう一度やり直してください notid")
+      return;
+    }
+    
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === todoItem.id ? {...item, completed:true, updatedAt: new Date() } : item
+    ));
+  }
 
   const list = editList? editList : undefined;
 
@@ -157,6 +169,7 @@ function App() {
               key={todoItem.id}
               {...todoItem}
               onClick={() => onClickList(todoItem)}
+              onSetComplete={() => onSetComplete(todoItem)}
             /> 
           ))}
         </ul>
