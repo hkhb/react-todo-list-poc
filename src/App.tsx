@@ -97,6 +97,7 @@ function App() {
     ));
     closeModal();
   }
+  const list = editList? editList : null;
 
   return (
     <div className='container'>
@@ -109,7 +110,7 @@ function App() {
         >
           <div>
             <ItemModal
-              editList={editList}
+              editList={list}
               isEdit={isEdit}
               onEditList={onEditList}
               onAddList={onAddList}
