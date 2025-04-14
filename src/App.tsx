@@ -32,6 +32,25 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+
+  useEffect(() => {
+    const storedItem = localStorage.getItem('todoItems');
+  
+    if (storedItem && storedItem !== "undefined") {
+        const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
+          ...item,
+          createdAt: new Date(item.createdAt),
+          updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+        }));
+        setTodoItems(parsedItems);
+      }else{
+      setTodoItems(undefined);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+  },[todoItems])
   
   //モーダルを開く
   //引数　なし
@@ -84,7 +103,6 @@ function App() {
         }
         setTodoItems([newTodo]);
       }
-      localStorage.setItem('todoItems', JSON.stringify(todoItems));
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -107,9 +125,9 @@ function App() {
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
     ));
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
+
   const list = editList? editList : undefined;
 
   return (
