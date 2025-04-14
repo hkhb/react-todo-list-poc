@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from "react";
+import { TodoItem } from '../App.tsx'
 
 interface ItemModalProps {
-  editList: any;
+  editList?: TodoItem;
   isEdit: boolean;
   onEditList: (title:string, description:string, id:number) => void;
   onAddList: (title:string, description:string) => void;
