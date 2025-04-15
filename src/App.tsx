@@ -144,6 +144,9 @@ function App() {
   }
 
   const list = editList? editList : undefined;
+  const sortedLists = todoItems.sort((a,b) => {
+    return Number(a.completed) - Number(b.completed);
+  })
 
   return (
     <div className='container'>
@@ -167,7 +170,7 @@ function App() {
       </div>
       {todoItems? 
         <ul>
-          {todoItems.map((todoItem)=> (
+          {sortedLists.map((todoItem)=> (
             <Lists
               key={todoItem.id}
               {...todoItem}
