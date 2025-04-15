@@ -28,10 +28,11 @@ export interface TodoItem {
 
 function App() {
 
-  const [todoItems, setTodoItems] = useState<TodoItem[]>();
+  const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const storedItem = localStorage.getItem('todoItems');
@@ -43,13 +44,16 @@ function App() {
           updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
         }));
         setTodoItems(parsedItems);
+        setIsLoaded(true);
       }else{
       setTodoItems(undefined);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    if(isLoaded){
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    }
   },[todoItems])
   
   //モーダルを開く
