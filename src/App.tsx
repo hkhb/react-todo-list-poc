@@ -47,7 +47,6 @@ function App() {
         setIsLoaded(true);
       }else{
       setTodoItems(undefined);
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
     }
   }, []);
 
