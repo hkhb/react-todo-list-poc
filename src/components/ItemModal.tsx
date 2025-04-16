@@ -13,8 +13,8 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
 
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+  const listTitle:string = ((isEdit && editList) ? editList.title : "");
+  const listDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
 
   function onOk(){
     if(isEdit&&editList){
@@ -25,9 +25,9 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
   };
 
   useEffect(() => {
-      setNewTitle(ListTitle);
-      setNewDescription(ListDescription);
-    }, [ListTitle, ListDescription]);
+      setNewTitle(listTitle);
+      setNewDescription(listDescription);
+    }, [listTitle, listDescription]);
 
   return(
   <div>
