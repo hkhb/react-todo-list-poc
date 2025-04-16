@@ -25,9 +25,9 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
   };
 
   useEffect(() => {
-      setNewTitle(ListTitle);
-      setNewDescription(ListDescription);
-    }, [ListTitle, ListDescription]);
+      setNewTitle(listTitle);
+      setNewDescription(listDescription);
+    }, [listTitle, listDescription]);
 
   return(
   <div>
