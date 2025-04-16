@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import Modal from "./components/Modal.tsx";
-import Lists from "./components/list.tsx";
+import { useState} from 'react';
+import "./App.css"
+import Modal from './components/Modal.tsx'
+import Lists from "./components/list.tsx"
+import ItemModal from "./components/ItemModal.tsx"
 
 export interface TodoItem {
   id: number;
@@ -175,7 +176,7 @@ function App() {
     ));
     closeModal();
   }
-  const list = editList? editList : null;
+  const list = editList? editList : undefined;
 
   return (
     <div className="container">
@@ -192,8 +193,7 @@ function App() {
               isEdit={isEdit}
               onEditList={onEditList}
               onAddList={onAddList}
-              >
-            </ItemModal>
+              />
           </div>
         </Modal>
       </div>
