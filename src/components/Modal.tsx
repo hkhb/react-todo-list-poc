@@ -6,13 +6,11 @@ interface modalProps{
   children?: ReactNode;
 }
 
-
 function Modal({
     showFlag,
     onCancel,
     children
   }:modalProps){
-
   return(
     showFlag?(
       <div id="overlay" className="overlay" >

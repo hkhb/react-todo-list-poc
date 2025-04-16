@@ -1,13 +1,14 @@
 import React from 'react';
+import { format } from 'date-fns';
 import "./list.css"
 import { TodoItem } from '../App.tsx'
 
 interface TodoItemWithClick extends TodoItem {
   onClick: () => void;
 }
-  
 
-  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, onClick}) => {
+  const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClick}) => {
+    const displayDate = format(updatedAt ? updatedAt : createdAt, 'yyyy-MM-dd HH:mm');
 
     return(
       <div className={`todo-item ${completed ? 'completed' : 'pending'}`} >
@@ -21,9 +22,11 @@ interface TodoItemWithClick extends TodoItem {
               )}
           </p>
         </div>
-        
-        <p className="todo-description" onClick={onClick}>{description}</p>
+        <div>
+          <p className="todo-description" onClick={onClick}>{description}</p>
+          <p className='todo-time'>{displayDate}</p>
         </div>
+      </div>
     )
 }
 export default Lists;
