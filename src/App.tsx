@@ -79,12 +79,12 @@ function App() {
     }
     const confirm = window.confirm("本当に削除しますか？");
     if(confirm){
-    const prevtodoItems:TodoItem[] = todoItems
-    const newtodoItems:TodoItem[] = 
-    prevtodoItems.filter((Item:TodoItem) => Item.id !== id
-    )
-    setTodoItems(newtodoItems);
-  }
+      const prevtodoItems:TodoItem[] = todoItems
+      const newtodoItems:TodoItem[] = 
+        prevtodoItems.filter((Item:TodoItem) => Item.id !== id
+        )
+      setTodoItems(newtodoItems);
+    }   
   }
   const onAddList = (title:string, description:string) => {
     if(!!title){
