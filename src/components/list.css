@@ -61,3 +61,10 @@
   color: orange;
   margin-left: 20px;
 }
+
+/* 時間の表示 */
+.todo-time {
+  margin: 0;
+  font-size: 0.5rem;
+  text-align: right;
+}
