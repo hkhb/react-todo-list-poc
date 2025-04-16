@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { TodoItem } from '../App.tsx'
 
 interface ItemModalProps {
@@ -11,10 +11,10 @@ interface ItemModalProps {
 
 const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onAddList }) => {
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
   const listTitle:string = ((isEdit && editList) ? editList.title : "");
   const listDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+  const [newTitle, setNewTitle] = useState(listTitle);
+  const [newDescription, setNewDescription] = useState(listDescription);
 
   function onOk(){
     if(isEdit&&editList){
@@ -23,11 +23,6 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
       onAddList(newTitle, newDescription);
     }
   };
-
-  useEffect(() => {
-      setNewTitle(listTitle);
-      setNewDescription(listDescription);
-    }, [listTitle, listDescription]);
 
   return(
   <div>
