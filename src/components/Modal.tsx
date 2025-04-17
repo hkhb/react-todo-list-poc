@@ -1,6 +1,6 @@
-import './Modal.css'
-import { ReactNode } from 'react';
-interface modalProps{
+import "./Modal.css";
+import { ReactNode } from "react";
+interface modalProps {
   showFlag: boolean;
   onCancel: () => void;
   children?: ReactNode;
@@ -21,8 +21,7 @@ function Modal({
           </div>
         </div>
       </div>
-    ):
-      null 
-  )
+    </div>
+  ) : null;
 }
 export default Modal;

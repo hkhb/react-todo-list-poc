@@ -10,7 +10,7 @@ export interface TodoItem {
   description?: string; // 任意の詳細情報
   completed: boolean;
   createdAt: Date;
-  updatedAt?: Date;   // 更新日時（任意）
+  updatedAt?: Date; // 更新日時（任意）
 }
 
 function App() {
@@ -49,16 +49,16 @@ function App() {
   //モーダルを開く
   //引数　なし
   //戻り値　なし
-  const openModal = () =>{
+  const openModal = () => {
     setShowModal(true);
-  }
+  };
   //モーダルを閉じる
   //引数　なし
   //戻り値　なし
-  const closeModal = () =>{
+  const closeModal = () => {
     setShowModal(false);
     setIsEdit(false);
-  }
+  };
   //モーダルをキャンセル
   //引数　なし
   //戻り値　なし
@@ -68,11 +68,11 @@ function App() {
   //listを受取、モーダルで編集する
   //引数　todoItem
   //戻り値　なし
-  const onClickList = (todoItem:TodoItem) => {
+  const onClickList = (todoItem: TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
-  }
+  };
   //新しいリストの追加
   //引数　title, dedcriotion
   //戻り値　なし
@@ -98,10 +98,10 @@ function App() {
         setTodoItems([newTodo]);
       }
       closeModal();
-    }else{
-      alert("titleを入力してください")
+    } else {
+      alert("titleを入力してください");
     }
-  }
+  };
   // 編集したものものを受取、リストに反映させる
   //引数　title, dedcriotion, id
   //titleがある場合
@@ -109,25 +109,33 @@ function App() {
   //titleがない場合
   //戻り値　なし
   //titleがない場合は、alartを出す
-  const onEditList = (title:string, description:string, id:number) => {
-    if(!title){
-      alert("titleを入力してください")
+  const onEditList = (title: string, description: string, id: number) => {
+    if (!title) {
+      alert("titleを入力してください");
       return;
     }
-    
+
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
-    ));
+        item.id === id
+          ? {
+              ...item,
+              title: title,
+              description: description,
+              updatedAt: new Date(),
+            }
+          : item,
+      ),
+    );
     closeModal();
   }
 
   const list = editList? editList : undefined;
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>TODOlist</h1>
-      <div className='open-modal' >
+      <div className="open-modal">
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
@@ -156,7 +164,7 @@ function App() {
       :<p>リストはありません</p>  
       }
     </div>
-  )
+  );
 }
 
 export default App;
