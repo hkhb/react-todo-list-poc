@@ -6,7 +6,6 @@ import { TodoItem } from '../App.tsx'
 interface TodoItemWithClick extends TodoItem {
   onClick: () => void;
 }
-  
 
   const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClick}) => {
     const displayDate = format(updatedAt ? updatedAt : createdAt, 'yyyy-MM-dd HH:mm');
