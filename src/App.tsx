@@ -2,6 +2,7 @@ import { useState, useEffect,} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
+import Header from "./components/header.tsx"
 
 export interface TodoItem {
   id: number;
@@ -116,6 +117,12 @@ function App() {
     }
   };
 
+  const onSortList = (completed, unComplete) => {
+    if(completed){
+      const completedLists = todoItems.filter((completed) => completed === true )
+    }
+  }
+
   useEffect(() => {
     setNewTitle(ListTitle);
     setNewDescription(ListDescription);
@@ -151,7 +158,7 @@ function App() {
 
   return (
     <div className='container'>
-      <h1>TODOlist</h1>
+      <Header onSortList={onSortList}/>
       <div className='open-modal' >
         <button onClick={openModal}>新規作成</button>
         <Modal
