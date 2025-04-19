@@ -156,6 +156,7 @@ function App() {
             value={newDescription}
             onChange={(e) => setNewDescription(e.target.value)}
           />
+          <button onClick={onOk}>OK</button>
         </div>
       </div>
     </div>
