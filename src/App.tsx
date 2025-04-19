@@ -32,6 +32,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+  const [showList, setShowList] = useState<TodoItem[]>([]);
   
   //モーダルを開く
   //引数　なし
@@ -117,10 +118,14 @@ function App() {
     }
   };
 
-  const onSortList = (completed, unComplete) => {
-    if(completed){
-      const completedLists = todoItems.filter((completed) => completed === true )
+  const onSortList = (isSwitch:boolean) => {
+    let List:TodoItem[] = [];
+    if(isSwitch){
+      List = todoItems.filter((list) => list.completed === true );
+    }else{
+      List = todoItems.filter((list) => list.completed === false );
     }
+    setShowList([...List])
   }
 
   useEffect(() => {
@@ -169,11 +174,11 @@ function App() {
         </Modal>
       </div>
       <ul>
-        {todoItems.map((todoItem)=> (
+        {showList.map((item)=> (
           <Lists
-            key={todoItem.id}
-            {...todoItem}
-            onClick={() => onClickList(todoItem)}
+            key={item.id}
+            {...item}
+            onClick={() => onClickList(item)}
           /> 
         ))}
       </ul>
