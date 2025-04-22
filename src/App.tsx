@@ -46,7 +46,7 @@ function App() {
         setTodoItems(parsedItems);
         setIsLoaded(true);
       }else{
-      setTodoItems(undefined);
+      setTodoItems([]);
     }
   }, []);
 
@@ -139,39 +139,11 @@ function App() {
     
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === todoItem.id ? {...item, completed:true, updatedAt: new Date() } : item
+        item.id === todoItem.id ? {...item, completed:!item.completed, updatedAt: new Date() } : item
     ));
   }
 
   const list = editList? editList : undefined;
-
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name='title'
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id='description-field'>
-          <label>詳細</label>
-          <input
-            type="text"
-            id='description'
-            name='description'
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className='container'>
