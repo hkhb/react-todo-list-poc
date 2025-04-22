@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./header.css"
+import "./Header.css"
 // headerに完了ボタンと未完了ボタンを作成　タイトルも作成
 // 完了ボタンを押すと完了しているリストが表示と非表示が切り替わる(デフォルト：表示)
 // 未完了ボタンを押すと未完了なリストが表示と非表示が切り替わる(デフォルト：表示)

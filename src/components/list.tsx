@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import "./list.css"
+import "./List.css"
 import { TodoItem } from '../App.tsx'
 
 interface TodoItemWithClick extends TodoItem {
