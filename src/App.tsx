@@ -1,4 +1,4 @@
-import { useState, useEffect,} from 'react';
+import { useState} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
@@ -139,8 +139,7 @@ function App() {
               isEdit={isEdit}
               onEditList={onEditList}
               onAddList={onAddList}
-              >
-            </ItemModal>
+              />
           </div>
         </Modal>
       </div>

@@ -11,10 +11,10 @@ interface ItemModalProps {
 
 const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onAddList }) => {
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+  const listTitle:string = ((isEdit && editList) ? editList.title : "");
+  const listDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+  const [newTitle, setNewTitle] = useState(listTitle);
+  const [newDescription, setNewDescription] = useState(listDescription);
 
   function onOk(){
     if(isEdit&&editList){
