@@ -1,7 +1,8 @@
-import { useState, useEffect,} from 'react';
+import { useState} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
+import ItemModal from "./components/ItemModal.tsx"
 
 export interface TodoItem {
   id: number;
@@ -96,30 +97,7 @@ function App() {
     ));
     closeModal();
   }
-  
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
-
-  //listの追加、編集のモーダル
-  // 引数　なし
-  // 戻り値　なし
-  // isEditとeditListがあればonEditListを実行
-  // なければonAddListを実行
-
-  function onOk(){
-    if(isEdit&&editList){
-      onEditList(newTitle, newDescription, editList.id);
-    }else{
-      onAddList(newTitle, newDescription);
-    }
-  };
-
-  useEffect(() => {
-    setNewTitle(ListTitle);
-    setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal]);
+  const list = editList? editList : undefined;
 
   const ItemModal = (
     <div>
@@ -158,7 +136,14 @@ function App() {
           showFlag={showModal}
           onCancel={onModalCancel}
         >
-          {ItemModal}
+          <div>
+            <ItemModal
+              editList={list}
+              isEdit={isEdit}
+              onEditList={onEditList}
+              onAddList={onAddList}
+              />
+          </div>
         </Modal>
       </div>
       <ul>
