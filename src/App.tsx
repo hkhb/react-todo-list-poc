@@ -1,7 +1,8 @@
-import { useState, useEffect,} from 'react';
+import { useState} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
+import ItemModal from "./components/ItemModal.tsx"
 
 export interface TodoItem {
   id: number;
@@ -121,30 +122,35 @@ function App() {
     ));
     closeModal();
   }
-  
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
+  const list = editList? editList : undefined;
 
-  //listの追加、編集のモーダル
-  // 引数　なし
-  // 戻り値　なし
-  // isEditとeditListがあればonEditListを実行
-  // なければonAddListを実行
-
-  function onOk(){
-    if(isEdit&&editList){
-      onEditList(newTitle, newDescription, editList.id);
-    }else{
-      onAddList(newTitle, newDescription);
-    }
-  };
-
-  useEffect(() => {
-    setNewTitle(ListTitle);
-    setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal]);
+  const ItemModal = (
+    <div>
+      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
+      <div id="form-container">
+        <div id='title-field'>
+          <label>タイトル</label>
+          <input
+            type="text"
+            id="title"
+            name='title'
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+        </div>
+        <div id='description-field'>
+          <label>詳細</label>
+          <input
+            type="text"
+            id='description'
+            name='description'
+            value={newDescription}
+            onChange={(e) => setNewDescription(e.target.value)}
+          />
+        </div>
+      </div>
+    </div>
+  );
 
   const ItemModal = (
     <div>
