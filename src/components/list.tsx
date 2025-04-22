@@ -7,7 +7,6 @@ interface TodoItemWithClick extends TodoItem {
   onClick: () => void;
   onSetComplete: () => void;
 }
-  
 
   const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClick, onSetComplete}) => {
     const displayDate = format(updatedAt? updatedAt : createdAt, "yyyy-MM-dd HH:mm")
