@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
-import Lists from "./components/list.tsx"
+import Lists from './components/list.tsx'
 import Header from "./components/header.tsx"
 
 export interface TodoItem {
