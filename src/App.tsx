@@ -13,19 +13,6 @@ export interface TodoItem {
   updatedAt?: Date;   // 更新日時（任意）
 }
 
-// const initialTodoItems:TodoItem[] = [
-//   {id : 1, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(2025, 3, 4), updatedAt: new Date(2025, 3, 4)},
-//   {id : 2, title: "洗濯", completed: true, createdAt: new Date(20250304)},
-//   {id : 3, title: "料理", description: "味噌汁", completed: false, createdAt: new Date(2025, 3, 4)},
-//   {id : 4, title: "掃除", description: "1234", completed: false, createdAt: new Date()},
-//   {id : 5, title: "掃除", completed: false, createdAt: new Date(), updatedAt: new Date()},
-//   {id : 6, title: "掃除", description: "true", completed: true, createdAt: new Date(2025, 3, 4)},
-//   {id : 7, title: "1223", description: "null", completed: false, createdAt: new Date(2025, 3, 4)},
-//   {id : 8, title: "", description: "", completed: false, createdAt: new Date(20250304)},
-//   {id : 9, title: "掃除", description: "キッチンの掃除", completed: true, createdAt: new Date(2025, 3, 4)},
-//   {id : 10, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(20250304)},
-// ]
-
 function App() {
 
   const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
@@ -37,7 +24,7 @@ function App() {
   useEffect(() => {
     const storedItem = localStorage.getItem('todoItems');
   
-    if (storedItem && storedItem !== "undefined") {
+    if (storedItem) {
         const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
           ...item,
           createdAt: new Date(item.createdAt),
@@ -45,14 +32,17 @@ function App() {
         }));
         setTodoItems(parsedItems);
         setIsLoaded(true);
+        console.log("find!!!!!!!!!!")
       }else{
-      setTodoItems(undefined);
+      setTodoItems([]);
+      setIsLoaded(true);
     }
   }, []);
 
   useEffect(() => {
     if(isLoaded){
       localStorage.setItem('todoItems', JSON.stringify(todoItems));
+      console.log("save!!!!!!!!!!")
     }
   },[todoItems])
   
@@ -133,34 +123,6 @@ function App() {
   }
 
   const list = editList? editList : undefined;
-
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name='title'
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id='description-field'>
-          <label>詳細</label>
-          <input
-            type="text"
-            id='description'
-            name='description'
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className='container'>
