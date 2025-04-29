@@ -1,12 +1,13 @@
-import React from 'react';
-import { format } from 'date-fns';
-import "./list.css"
-import { TodoItem } from '../App.tsx'
+import React from "react";
+import { format } from "date-fns";
+import "./list.css";
+import { TodoItem } from "../App.tsx";
 
 interface TodoItemWithClick extends TodoItem {
   onClickEdit: () => void;
   onClickDelete: () => void;
 }
+
   const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClickEdit, onClickDelete}) => {
     const displayDate = format(updatedAt ? updatedAt : createdAt, 'yyyy-MM-dd HH:mm');
 

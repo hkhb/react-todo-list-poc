@@ -21,8 +21,7 @@ function Modal({
           </div>
         </div>
       </div>
-    ):
-      null 
-  )
+    </div>
+  ) : null;
 }
 export default Modal;

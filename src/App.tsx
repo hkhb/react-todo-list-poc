@@ -10,42 +10,96 @@ export interface TodoItem {
   description?: string; // 任意の詳細情報
   completed: boolean;
   createdAt: Date;
-  updatedAt?: Date;   // 更新日時（任意）
+  updatedAt?: Date; // 更新日時（任意）
 }
 
-const initialTodoItems:TodoItem[] = [
-  {id : 1, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(2025, 3, 4), updatedAt: new Date(2025, 3, 4)},
-  {id : 2, title: "洗濯", completed: true, createdAt: new Date(20250304)},
-  {id : 3, title: "料理", description: "味噌汁", completed: false, createdAt: new Date(2025, 3, 4)},
-  {id : 4, title: "掃除", description: "1234", completed: false, createdAt: new Date()},
-  {id : 5, title: "掃除", completed: false, createdAt: new Date(), updatedAt: new Date()},
-  {id : 6, title: "掃除", description: "true", completed: true, createdAt: new Date(2025, 3, 4)},
-  {id : 7, title: "1223", description: "null", completed: false, createdAt: new Date(2025, 3, 4)},
-  {id : 8, title: "", description: "", completed: false, createdAt: new Date(20250304)},
-  {id : 9, title: "掃除", description: "キッチンの掃除", completed: true, createdAt: new Date(2025, 3, 4)},
-  {id : 10, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(20250304)},
-]
+const initialTodoItems: TodoItem[] = [
+  {
+    id: 1,
+    title: "掃除",
+    description: "キッチンの掃除",
+    completed: false,
+    createdAt: new Date(2025, 3, 4),
+    updatedAt: new Date(2025, 3, 4),
+  },
+  { id: 2, title: "洗濯", completed: true, createdAt: new Date(20250304) },
+  {
+    id: 3,
+    title: "料理",
+    description: "味噌汁",
+    completed: false,
+    createdAt: new Date(2025, 3, 4),
+  },
+  {
+    id: 4,
+    title: "掃除",
+    description: "1234",
+    completed: false,
+    createdAt: new Date(),
+  },
+  {
+    id: 5,
+    title: "掃除",
+    completed: false,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 6,
+    title: "掃除",
+    description: "true",
+    completed: true,
+    createdAt: new Date(2025, 3, 4),
+  },
+  {
+    id: 7,
+    title: "1223",
+    description: "null",
+    completed: false,
+    createdAt: new Date(2025, 3, 4),
+  },
+  {
+    id: 8,
+    title: "",
+    description: "",
+    completed: false,
+    createdAt: new Date(20250304),
+  },
+  {
+    id: 9,
+    title: "掃除",
+    description: "キッチンの掃除",
+    completed: true,
+    createdAt: new Date(2025, 3, 4),
+  },
+  {
+    id: 10,
+    title: "掃除",
+    description: "キッチンの掃除",
+    completed: false,
+    createdAt: new Date(20250304),
+  },
+];
 
 function App() {
-
   const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
-  
+
   //モーダルを開く
   //引数　なし
   //戻り値　なし
-  const openModal = () =>{
+  const openModal = () => {
     setShowModal(true);
-  }
+  };
   //モーダルを閉じる
   //引数　なし
   //戻り値　なし
-  const closeModal = () =>{
+  const closeModal = () => {
     setShowModal(false);
     setIsEdit(false);
-  }
+  };
   //モーダルをキャンセル
   //引数　なし
   //戻り値　なし
@@ -55,7 +109,7 @@ function App() {
   //listを受取、モーダルで編集する
   //引数　todoItem
   //戻り値　なし
-  const onClickList = (todoItem:TodoItem) => {
+  const onClickList = (todoItem: TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
@@ -125,24 +179,26 @@ function App() {
   const list = editList? editList : undefined;
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>TODOlist</h1>
-      <div className='open-modal' >
+      <div className="open-modal">
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
           onCancel={onModalCancel}
         >
-          <ItemModal 
-            editList={list}
-            isEdit={isEdit}
-            onEditList={onEditList}
-            onAddList={onAddList}
-          />
+          <div>
+            <ItemModal
+              editList={list}
+              isEdit={isEdit}
+              onEditList={onEditList}
+              onAddList={onAddList}
+              />
+          </div>
         </Modal>
       </div>
       <ul>
-        {todoItems.map((todoItem)=> (
+        {todoItems.map((todoItem) => (
           <Lists
             key={todoItem.id}
             {...todoItem}
@@ -152,7 +208,7 @@ function App() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 export default App;

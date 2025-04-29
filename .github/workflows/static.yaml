@@ -34,11 +34,28 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: npm ci && npm run build
-        # env:
-        #   PUBLIC_URL: /js
+        run: npm run build
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"  # distフォルダにビルド結果があることを確認
+
+  deploy:
+    needs: build
+    permissions:
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           path: "./dist"
 
