@@ -60,13 +60,38 @@ function App() {
     setEditList(todoItem);
     openModal();
   }
-  //新しいリストの追加
-  //引数　title, dedcriotion
-  //戻り値　なし
+  //リストの削除
+  //引数 id
+  //idがある場合 
+  //alartを出す(削除OK？)
+  //戻り値なし
+  //idがない場合 
+  //alartを出す(idがない)
+  //戻り値なし 
+  //現在のtodolistを新しい変数で受け取る
+  //リストごとに分割
+  //idが同じでない場合、newtodolistに格納 
+  //idが同じ場合、何もしない
+  //setterでnewtodolistに変更
+  const onDelete = (id:number) =>{
+    if(!id){
+      alert("idがありません")
+      return;
+    }
+    const confirm:boolean = window.confirm("本当に削除しますか？");
+    if(confirm){
+      const prevtodoItems:TodoItem[] = todoItems
+      const newtodoItems:TodoItem[] = 
+        prevtodoItems.filter((Item:TodoItem) => Item.id !== id
+        )
+      setTodoItems(newtodoItems);
+    }
+  }
   const onAddList = (title:string, description:string) => {
     if(!!title){
+      const newId:number = Math.max(0,...todoItems.map(item => item.id)) +1;
       const newTodo:TodoItem = {
-        id: todoItems.length + 1,
+        id: newId,
         title,
         description,
         completed: false,
@@ -99,34 +124,6 @@ function App() {
   }
   const list = editList? editList : undefined;
 
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name='title'
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id='description-field'>
-          <label>詳細</label>
-          <input
-            type="text"
-            id='description'
-            name='description'
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className='container'>
       <h1>TODOlist</h1>
@@ -136,14 +133,12 @@ function App() {
           showFlag={showModal}
           onCancel={onModalCancel}
         >
-          <div>
-            <ItemModal
-              editList={list}
-              isEdit={isEdit}
-              onEditList={onEditList}
-              onAddList={onAddList}
-              />
-          </div>
+          <ItemModal 
+            editList={list}
+            isEdit={isEdit}
+            onEditList={onEditList}
+            onAddList={onAddList}
+          />
         </Modal>
       </div>
       <ul>
@@ -151,7 +146,8 @@ function App() {
           <Lists
             key={todoItem.id}
             {...todoItem}
-            onClick={() => onClickList(todoItem)}
+            onClickEdit={() => onClickList(todoItem)}
+            onClickDelete={() => onDelete(todoItem.id)}
           /> 
         ))}
       </ul>
