@@ -37,8 +37,6 @@ jobs:
 
       - name: Build
         run: npm ci && npm run build
-        # env:
-        #   PUBLIC_URL: /js
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -52,8 +50,12 @@ jobs:
       pages: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Show deployed URL
+        run: echo "Deployed to: ${{ steps.deployment.outputs.page_url }}"
