@@ -1,60 +1,50 @@
 name: Deploy static content to Pages
 
 on:
+  # デフォルトブランチを対象としたプッシュ時にで実行されます
   push:
-    branches: 
-      - feature/*
-      - bugfix/*
+    - feature/*
+    - bugfix/*
+
+  # Actions タブから手動でワークフローを実行できるようにします
   workflow_dispatch:
 
+# GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# 1 つの同時デプロイメントを可能にする
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  build:
+  # 単一のデプロイジョブ
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 18
+          version: 9.10.0
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Build
-        run: npm run build
-
-      - name: Setup GitHub Pages
+        run: pnpm run build
+      - name: Setup Pages
         uses: actions/configure-pages@v5
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"  # distフォルダにビルド結果があることを確認
-
-  deploy:
-    needs: build
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
+          # dist フォルダーのアップロード
           path: "./dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
