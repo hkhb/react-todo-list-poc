@@ -6,15 +6,19 @@ interface modalProps{
   children?: ReactNode;
 }
 
-function Modal({ showFlag, onCancel, children }: modalProps) {
-  return showFlag ? (
-    <div id="overlay" className="overlay">
-      <div id="modalContent" className="modalContent">
-        <div>
-          <button id="topBotton" onClick={onCancel}>
-            cancel
-          </button>
-          {children}
+function Modal({
+    showFlag,
+    onCancel,
+    children
+  }:modalProps){
+  return(
+    showFlag?(
+      <div id="overlay" className="overlay" >
+        <div id="modalContent" className="modalContent">
+          <div>
+            <button className="topBotton" onClick={onCancel}>cancel</button>
+            {children}
+          </div>
         </div>
       </div>
     </div>
