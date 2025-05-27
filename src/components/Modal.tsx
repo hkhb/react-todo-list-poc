@@ -11,18 +11,17 @@ function Modal({
     onCancel,
     children
   }:modalProps){
-  return(
-    showFlag?(
-      <div id="overlay" className="overlay" >
-        <div id="modalContent" className="modalContent">
-          <div>
-            <button className="topBotton" onClick={onCancel}>cancel</button>
-            {children}
+    return(
+      showFlag?(
+        <div id="overlay" className="overlay" >
+          <div id="modalContent" className="modalContent">
+            <div>
+              <button className="topBotton" onClick={onCancel}>cancel</button>
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-    ):
-      null 
-  )
-}
+      ) : null
+    )
+  }
 export default Modal;

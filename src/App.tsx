@@ -10,7 +10,7 @@ export interface TodoItem {
   description?: string; // 任意の詳細情報
   completed: boolean;
   createdAt: Date;
-  updatedAt?: Date;   // 更新日時（任意）
+  updatedAt?: Date; // 更新日時（任意）
 }
 
 // const initialTodoItems:TodoItem[] = [
@@ -55,20 +55,20 @@ function App() {
       localStorage.setItem('todoItems', JSON.stringify(todoItems));
     }
   },[todoItems])
-  
+      
   //モーダルを開く
   //引数　なし
   //戻り値　なし
-  const openModal = () =>{
+  const openModal = () => {
     setShowModal(true);
-  }
+  };
   //モーダルを閉じる
   //引数　なし
   //戻り値　なし
-  const closeModal = () =>{
+  const closeModal = () => {
     setShowModal(false);
     setIsEdit(false);
-  }
+  };
   //モーダルをキャンセル
   //引数　なし
   //戻り値　なし
@@ -78,14 +78,38 @@ function App() {
   //listを受取、モーダルで編集する
   //引数　todoItem
   //戻り値　なし
-  const onClickList = (todoItem:TodoItem) => {
+  const onClickList = (todoItem: TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
   }
-  //新しいリストの追加
-  //引数　title, dedcriotion
-  //戻り値　なし
+  //リストの削除
+  //引数 id
+  //idがある場合 
+  //alartを出す(削除OK？)
+  //戻り値なし
+  //idがない場合 
+  //alartを出す(idがない)
+  //戻り値なし 
+  //現在のtodolistを新しい変数で受け取る
+  //リストごとに分割
+  //idが同じでない場合、newtodolistに格納 
+  //idが同じ場合、何もしない
+  //setterでnewtodolistに変更
+  const onDelete = (id:number) =>{
+    if(!id){
+      alert("idがありません")
+      return;
+    }
+    const confirm:boolean = window.confirm("本当に削除しますか？");
+    if(confirm){
+      const prevtodoItems:TodoItem[] = todoItems
+      const newtodoItems:TodoItem[] = 
+        prevtodoItems.filter((Item:TodoItem) => Item.id !== id
+        )
+      setTodoItems(newtodoItems);
+    }
+  }
   const onAddList = (title:string, description:string) => {
     if(!!title){
       if(todoItems){
@@ -146,9 +170,9 @@ function App() {
   const list = editList? editList : undefined;
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>TODOlist</h1>
-      <div className='open-modal' >
+      <div className="open-modal">
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
@@ -178,7 +202,7 @@ function App() {
       :<p>リストはありません</p>  
       }
     </div>
-  )
+  );
 }
 
 export default App;
