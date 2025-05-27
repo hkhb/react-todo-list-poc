@@ -1,9 +1,8 @@
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
-import Lists from "./components/list.tsx"
-import ItemModal from "./components/ItemModal.tsx"
+import Lists from './components/list.tsx'
+import Header from "./components/header.tsx"
 
 export interface TodoItem {
   id: number;
@@ -20,6 +19,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
+  const [showList, setShowList] = useState<TodoItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -155,12 +155,54 @@ function App() {
     ));
   }
 
-  const list = editList? editList : undefined;
+  const onSortList = (isSwitch:boolean) => {
+    let List:TodoItem[] = [];
+    if(isSwitch){
+      List = todoItems.filter((list) => list.completed === true );
+    }else{
+      List = todoItems.filter((list) => list.completed === false );
+    }
+    setShowList([...List])
+  }
+
+  useEffect(() => {
+    setNewTitle(ListTitle);
+    setNewDescription(ListDescription);
+  }, [ListTitle, ListDescription, showModal]);
+
+  const ItemModal = (
+    <div>
+      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
+      <div id="form-container">
+        <div id='title-field'>
+          <label>タイトル</label>
+          <input
+            type="text"
+            id="title"
+            name='title'
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+        </div>
+        <div id='description-field'>
+          <label>詳細</label>
+          <input
+            type="text"
+            id='description'
+            name='description'
+            value={newDescription}
+            onChange={(e) => setNewDescription(e.target.value)}
+          />
+          <button onClick={onOk}>OK</button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="container">
-      <h1>TODOlist</h1>
-      <div className="open-modal">
+    <div className='container'>
+      <Header onSortList={onSortList}/>
+      <div className='open-modal' >
         <button onClick={openModal}>新規作成</button>
         <Modal
           showFlag={showModal}
