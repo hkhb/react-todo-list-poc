@@ -6,6 +6,7 @@ import { TodoItem } from "../App.tsx";
 interface TodoItemWithClick extends TodoItem {
   onClick: () => void;
   onSetComplete: () => void;
+  onClickDelete: () => void;
 }
 
   const Lists : React.FC<TodoItemWithClick> = ({completed, title, description, createdAt, updatedAt, onClick, onSetComplete}) => {
@@ -25,7 +26,7 @@ interface TodoItemWithClick extends TodoItem {
           <button className='delete-button' onClick={onClickDelete}>削除</button>
         </div>
         <div>
-          <p className="todo-description" onClick={onClickEdit}>{description}</p>
+          <p className="todo-description" onClick={onClick}>{description}</p>
           <p className='todo-time'>{displayDate}</p>
         </div>
       </div>
