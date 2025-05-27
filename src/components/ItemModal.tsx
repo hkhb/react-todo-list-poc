@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TodoItem } from '../App.tsx'
 
 interface ItemModalProps {
@@ -23,6 +23,11 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
       onAddList(newTitle, newDescription);
     }
   };
+
+  useEffect(() => {
+      setNewTitle(ListTitle);
+      setNewDescription(ListDescription);
+    }, [ListTitle, ListDescription]);
 
   return(
   <div>
