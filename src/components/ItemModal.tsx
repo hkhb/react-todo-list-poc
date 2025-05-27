@@ -22,12 +22,13 @@ const ItemModal: React.FC<ItemModalProps> = ({ editList, isEdit, onEditList, onA
     }else{
       onAddList(newTitle, newDescription);
     }
+    console.log("onOk", newTitle, newDescription);
   };
 
   useEffect(() => {
-      setNewTitle(ListTitle);
-      setNewDescription(ListDescription);
-    }, [ListTitle, ListDescription]);
+      setNewTitle(listTitle);
+      setNewDescription(listDescription);
+    }, [listTitle, listDescription]);
 
   return(
   <div>

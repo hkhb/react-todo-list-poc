@@ -33,7 +33,6 @@ function App() {
         }));
         setTodoItems(parsedItems);
         setIsLoaded(true);
-        console.log("find!!!!!!!!!!")
       }else{
       setTodoItems([]);
       setIsLoaded(true);
@@ -46,19 +45,6 @@ function App() {
       console.log("save!!!!!!!!!!")
     }
   },[todoItems])
-  
-    if (storedItem && storedItem !== "undefined") {
-        const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
-          ...item,
-          createdAt: new Date(item.createdAt),
-          updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
-        }));
-        setTodoItems(parsedItems);
-        setIsLoaded(true);
-      }else{
-      setTodoItems([]);
-    }
-  }, []);
 
   useEffect(() => {
     if(isLoaded){
@@ -133,6 +119,7 @@ function App() {
         completed: false,
         createdAt: new Date(),
       }
+      setTodoItems((prevItems) => [...prevItems, newTodo]);
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -204,7 +191,7 @@ function App() {
       :<p>リストはありません</p>  
       }
     </div>
-  );
+  )
 }
 
 export default App;
