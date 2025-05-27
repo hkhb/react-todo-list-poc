@@ -1,4 +1,5 @@
-import { useState, useEffect} from 'react';
+
+import { useState, useEffect } from 'react';
 import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from "./components/list.tsx"
@@ -46,6 +47,25 @@ function App() {
     }
   },[todoItems])
   
+    if (storedItem && storedItem !== "undefined") {
+        const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
+          ...item,
+          createdAt: new Date(item.createdAt),
+          updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+        }));
+        setTodoItems(parsedItems);
+        setIsLoaded(true);
+      }else{
+      setTodoItems([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if(isLoaded){
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    }
+  },[todoItems])
+      
   //モーダルを開く
   //引数　なし
   //戻り値　なし
@@ -113,7 +133,6 @@ function App() {
         completed: false,
         createdAt: new Date(),
       }
-      setTodoItems([...todoItems, newTodo]);
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -137,6 +156,17 @@ function App() {
     ));
     closeModal();
   }
+  const onSetComplete = (todoItem:TodoItem) => {
+    if(!todoItem.id){
+      alert("もう一度やり直してください notid")
+      return;
+    }
+    
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === todoItem.id ? {...item, completed:!item.completed, updatedAt: new Date() } : item
+    ));
+  }
 
   const list = editList? editList : undefined;
 
@@ -159,16 +189,20 @@ function App() {
           </div>
         </Modal>
       </div>
-      <ul>
-        {todoItems.map((todoItem) => (
-          <Lists
-            key={todoItem.id}
-            {...todoItem}
-            onClickEdit={() => onClickList(todoItem)}
-            onClickDelete={() => onDelete(todoItem.id)}
-          /> 
-        ))}
-      </ul>
+      {todoItems? 
+        <ul>
+          {todoItems.map((todoItem)=> (
+            <Lists
+              key={todoItem.id}
+              {...todoItem}
+              onClick={() => onClickList(todoItem)}
+              onSetComplete={() => onSetComplete(todoItem)}
+              onClickDelete={() => onDelete(todoItem.id)}
+            /> 
+          ))}
+        </ul>
+      :<p>リストはありません</p>  
+      }
     </div>
   );
 }
