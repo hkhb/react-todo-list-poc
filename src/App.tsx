@@ -3,6 +3,7 @@ import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from './components/list.tsx'
 import Header from "./components/header.tsx"
+import ItemModal from './components/ItemModal.tsx';
 
 export interface TodoItem {
   id: number;
@@ -10,25 +11,12 @@ export interface TodoItem {
   description?: string; // 任意の詳細情報
   completed: boolean;
   createdAt: Date;
-  updatedAt?: Date;   // 更新日時（任意）
+  updatedAt?: Date; // 更新日時（任意）
 }
-
-const initialTodoItems:TodoItem[] = [
-  {id : 1, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(2025, 3, 4), updatedAt: new Date(2025, 3, 4)},
-  {id : 2, title: "洗濯", completed: true, createdAt: new Date(20250304)},
-  {id : 3, title: "料理", description: "味噌汁", completed: false, createdAt: new Date(2025, 3, 4)},
-  {id : 4, title: "掃除", description: "1234", completed: false, createdAt: new Date()},
-  {id : 5, title: "掃除", completed: false, createdAt: new Date(), updatedAt: new Date()},
-  {id : 6, title: "掃除", description: "true", completed: true, createdAt: new Date(2025, 3, 4)},
-  {id : 7, title: "1223", description: "null", completed: false, createdAt: new Date(2025, 3, 4)},
-  {id : 8, title: "", description: "", completed: false, createdAt: new Date(20250304)},
-  {id : 9, title: "掃除", description: "キッチンの掃除", completed: true, createdAt: new Date(2025, 3, 4)},
-  {id : 10, title: "掃除", description: "キッチンの掃除", completed: false, createdAt: new Date(20250304)},
-]
 
 function App() {
 
-  const [todoItems, setTodoItems] = useState<TodoItem[]>(initialTodoItems);
+  const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
@@ -41,20 +29,51 @@ function App() {
       setTodoItems(value);
     }
   }, []); // ← 空の依存配列が重要！これで初回レンダー時のみ実行される
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const storedItem = localStorage.getItem('todoItems');
   
+    if (storedItem) {
+        const parsedItems: TodoItem[] = JSON.parse(storedItem).map((item: any) => ({
+          ...item,
+          createdAt: new Date(item.createdAt),
+          updatedAt: item.updatedAt ? new Date(item.updatedAt) : undefined,
+        }));
+        setTodoItems(parsedItems);
+        setIsLoaded(true);
+      }else{
+      setTodoItems([]);
+      setIsLoaded(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if(isLoaded){
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+      console.log("save!!!!!!!!!!")
+    }
+  },[todoItems])
+
+  useEffect(() => {
+    if(isLoaded){
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    }
+  },[todoItems])
+      
   //モーダルを開く
   //引数　なし
   //戻り値　なし
-  const openModal = () =>{
+  const openModal = () => {
     setShowModal(true);
-  }
+  };
   //モーダルを閉じる
   //引数　なし
   //戻り値　なし
-  const closeModal = () =>{
+  const closeModal = () => {
     setShowModal(false);
     setIsEdit(false);
-  }
+  };
   //モーダルをキャンセル
   //引数　なし
   //戻り値　なし
@@ -64,18 +83,46 @@ function App() {
   //listを受取、モーダルで編集する
   //引数　todoItem
   //戻り値　なし
-  const onClickList = (todoItem:TodoItem) => {
+  const onClickList = (todoItem: TodoItem) => {
     setIsEdit(true);
     setEditList(todoItem);
     openModal();
+  }
+  //リストの削除
+  //引数 id
+  //idがある場合 
+  //alartを出す(削除OK？)
+  //戻り値なし
+  //idがない場合 
+  //alartを出す(idがない)
+  //戻り値なし 
+  //現在のtodolistを新しい変数で受け取る
+  //リストごとに分割
+  //idが同じでない場合、newtodolistに格納 
+  //idが同じ場合、何もしない
+  //setterでnewtodolistに変更
+  const onDelete = (id:number) =>{
+    if(!id){
+      alert("idがありません")
+      return;
+    }
+    const confirm:boolean = window.confirm("本当に削除しますか？");
+    if(confirm){
+      const prevtodoItems:TodoItem[] = todoItems
+      const newtodoItems:TodoItem[] = 
+        prevtodoItems.filter((Item:TodoItem) => Item.id !== id
+        )
+      setTodoItems(newtodoItems);
+    }
   }
   //新しいリストの追加
   //引数　title, dedcriotion
   //戻り値　なし
   const onAddList = (title:string, description:string) => {
     if(!!title){
+      const newId:number = Math.max(0,...todoItems.map(item => item.id)) +1;
       const newTodo:TodoItem = {
-        id: todoItems.length + 1,
+        id: newId,
         title,
         description,
         completed: false,
@@ -93,14 +140,13 @@ function App() {
   //titleがある場合
   //戻り値　なし
   //titleがない場合
+  //alartを出す
   //戻り値　なし
-  //titleがない場合は、alartを出す
   const onEditList = (title:string, description:string, id:number) => {
     if(!title){
       alert("titleを入力してください")
       return;
     }
-    
     setTodoItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
@@ -108,25 +154,17 @@ function App() {
     localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
-  
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const ListTitle:string = ((isEdit && editList) ? editList.title : "");
-  const ListDescription:string = ((isEdit && editList)?editList.description ?? "" :"");
-
-  //listの追加、編集のモーダル
-  // 引数　なし
-  // 戻り値　なし
-  // isEditとeditListがあればonEditListを実行
-  // なければonAddListを実行
-
-  function onOk(){
-    if(isEdit&&editList){
-      onEditList(newTitle, newDescription, editList.id);
-    }else{
-      onAddList(newTitle, newDescription);
+  const onSetComplete = (todoItem:TodoItem) => {
+    if(!todoItem.id){
+      alert("もう一度やり直してください notid")
+      return;
     }
-  };
+    
+    setTodoItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === todoItem.id ? {...item, completed:!item.completed, updatedAt: new Date() } : item
+    ));
+  }
 
   const onSortList = (isSwitch:boolean) => {
     let List:TodoItem[] = [];
@@ -138,40 +176,6 @@ function App() {
     setShowList([...List])
   }
 
-  useEffect(() => {
-    setNewTitle(ListTitle);
-    setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal, todoItems]);
-
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name='title'
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id='description-field'>
-          <label>詳細</label>
-          <input
-            type="text"
-            id='description'
-            name='description'
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-          <button onClick={onOk}>OK</button>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className='container'>
       <Header onSortList={onSortList}/>
@@ -181,18 +185,30 @@ function App() {
           showFlag={showModal}
           onCancel={onModalCancel}
         >
-          {ItemModal}
+          <div>
+            <ItemModal
+              editList={editList}
+              isEdit={isEdit}
+              onEditList={onEditList}
+              onAddList={onAddList}
+              />
+          </div>
         </Modal>
       </div>
-      <ul>
-        {showList.map((item)=> (
-          <Lists
-            key={item.id}
-            {...item}
-            onClick={() => onClickList(item)}
-          /> 
-        ))}
-      </ul>
+      {todoItems? 
+        <ul>
+          {showList.map((todoItem)=> (
+            <Lists
+              key={todoItem.id}
+              {...todoItem}
+              onClick={() => onClickList(todoItem)}
+              onSetComplete={() => onSetComplete(todoItem)}
+              onClickDelete={() => onDelete(todoItem.id)}
+            /> 
+          ))}
+        </ul>
+      :<p>リストはありません</p>  
+      }
     </div>
   )
 }
