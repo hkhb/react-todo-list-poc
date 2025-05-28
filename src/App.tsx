@@ -3,6 +3,7 @@ import "./App.css"
 import Modal from './components/Modal.tsx'
 import Lists from './components/list.tsx'
 import Header from "./components/header.tsx"
+import ItemModal from './components/ItemModal.tsx';
 
 export interface TodoItem {
   id: number;
@@ -20,6 +21,14 @@ function App() {
   const [isEdit, setIsEdit] = useState(false);
   const [editList, setEditList] = useState<TodoItem>();
   const [showList, setShowList] = useState<TodoItem[]>([]);
+
+  useEffect(() => {
+    const storedItem = localStorage.getItem('todoItems');
+    if (storedItem !== null) {
+      const value: TodoItem[] = JSON.parse(storedItem);
+      setTodoItems(value);
+    }
+  }, []); // ← 空の依存配列が重要！これで初回レンダー時のみ実行される
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -119,7 +128,8 @@ function App() {
         completed: false,
         createdAt: new Date(),
       }
-      setTodoItems((prevItems) => [...prevItems, newTodo]);
+      setTodoItems([...todoItems, newTodo]);
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
       closeModal();
     }else{
       alert("titleを入力してください")
@@ -141,6 +151,7 @@ function App() {
       prevItems.map((item) =>
         item.id === id ? {...item, title: title, description: description, updatedAt: new Date() } : item
     ));
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
     closeModal();
   }
   const onSetComplete = (todoItem:TodoItem) => {
@@ -165,40 +176,6 @@ function App() {
     setShowList([...List])
   }
 
-  useEffect(() => {
-    setNewTitle(ListTitle);
-    setNewDescription(ListDescription);
-  }, [ListTitle, ListDescription, showModal]);
-
-  const ItemModal = (
-    <div>
-      <h1>{isEdit ? "リスト編集" : "リスト追加"}</h1>
-      <div id="form-container">
-        <div id='title-field'>
-          <label>タイトル</label>
-          <input
-            type="text"
-            id="title"
-            name='title'
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-          />
-        </div>
-        <div id='description-field'>
-          <label>詳細</label>
-          <input
-            type="text"
-            id='description'
-            name='description'
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-          <button onClick={onOk}>OK</button>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
     <div className='container'>
       <Header onSortList={onSortList}/>
@@ -210,7 +187,7 @@ function App() {
         >
           <div>
             <ItemModal
-              editList={list}
+              editList={editList}
               isEdit={isEdit}
               onEditList={onEditList}
               onAddList={onAddList}
@@ -220,7 +197,7 @@ function App() {
       </div>
       {todoItems? 
         <ul>
-          {todoItems.map((todoItem)=> (
+          {showList.map((todoItem)=> (
             <Lists
               key={todoItem.id}
               {...todoItem}
